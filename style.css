@@ -1,0 +1,46 @@
+.dropdown2 {
+  position: relative;
+  display: inline-block;
+  left : 90% ;
+  top: -3rem;
+}
+
+/* Show the dropdown content when the button is clicked */
+.dropdown2:hover .dropdown-content2 {
+  display: block;
+  transition: all .3s ease-in-out;
+
+
+} 
+.dropdown-content2 {
+  display: none;
+  right: 85%;
+  top: 37%;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 140px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition: all .3s ease-in-out;
+
+  
+}
+
+/* Style for dropdown items */
+.dropdown-content2 button {
+  color: rgb(0, 0, 0);
+  padding: 12px 16px;
+  width: 12rem;
+  text-decoration: none;
+  display: block;
+  font-size: large;
+  transition: all .3s ease-in-out;
+
+}
+
+/* Change color on hover */
+.dropdown-content2 button:hover {
+  background-color: #0e3955;
+  color: white;
+  transition: all .3s ease-in-out;
+}

@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.blueCastle{
+    position: absolute;
+    width: 450px;
+    top: 47.5%;
+    left: 70.5%;
+}
+
+
+.blueCastle:hover{
+    filter: drop-shadow(5px 7px 5px blue);
+    cursor: pointer;
+}
+.redCastle{
+    position: absolute;
+    width: 277px;
+    top: -1%;
+    left: 2%;
+}
+.redCastle:hover{
+    filter: drop-shadow(5px 7px 5px red);
+    cursor: pointer;
+}
+.stone{
+    /* z-index: -1; */
+    width: 210px;
+    transform: rotate(-20deg);
+    position: absolute;
+    top: 40%;
+    left: 7%;
+}
+.stone{
+    /* z-index: -1; */
+    width: 210px;
+
+    transform: rotate(-20deg);
+    position: absolute;
+    top: 40%;
+    left: 7%;
+}
+.container{
+    background-image: url("images/photoshop.png");
+    height: 100vh;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    
+}
+#blueCastleInfo{
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #fff;
+    position: relative;
+    top: 37%;
+    left: 72%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: larger;
+    animation: ds 2s ease-in-out infinite;
+
+}
+#redCastleInfo{
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #fff;
+    position: relative;
+    top: 10%;
+    left: 23%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: larger;
+    animation: dsred 2s ease-in-out infinite;
+
+}
+#tr{
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    position: absolute;
+    top: 40px;
+    left: 45%;
+    z-index: 555;
+}
+#trRed{
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    position: absolute;
+    top: 15px;
+    left: -8px;
+    z-index: 555;
+}
+
+@keyframes ds{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+@keyframes dsred{
+    0%{
+        transform: translateX(0);
+    }
+    50%{
+        transform: translateX(10px);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
