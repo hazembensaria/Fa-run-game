@@ -9,5 +9,6 @@ import Nain from "./nain.js";
         this.resource = 3
         this.winingRounds = 0
         this.availableGuerrier = [new Elf(guerrirUi[0]) , new Nain(guerrirUi[1]) ,new ChefNain(guerrirUi[2]) ,new ChefElf(guerrirUi[3])];
+        this.chosenGuerrier = []
     }
 }
