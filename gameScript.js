@@ -19,7 +19,7 @@ var blueCastle = new Castle("images/bleucastle2.png",
    var blueGuerrierList
    var redGuerrierList
 //    var blueGuerrirList = [] ;
-    var chosenGuerrier = new Array
+    
 function loadUi(){
    
    console.log(blueCastle , redCastle)
@@ -36,13 +36,23 @@ function loadUi(){
    const blutext = document.createTextNode(`resorces: ${blueCastle.resource} `)
    const blutext1 = document.createTextNode(`wining rounds: ${blueCastle.winingRounds} `)
    const redtext = document.createTextNode(`resorces: ${redCastle.resource} `)
-   const redText1 = document.createTextNode(`wining rounds: ${redCastle.winingRounds} `)
-    blueCastleInfo.appendChild(blutext)
-    blueCastleInfo.appendChild(blutext1)
-    redCastleInfo.appendChild(redtext)
-    redCastleInfo.appendChild(redText1)
+   const redtext1 = document.createTextNode(`wining rounds: ${redCastle.winingRounds} `)
+   const blutextDiv = document.createElement('div')
+   const redTextDiv = document.createElement('div')
+   const blueInfoDiv = document.createElement('div')
+   const redInfoDiv = document.createElement('div')
+   blutextDiv.id = "blueText"
+   redTextDiv.id = "redText"
+   blutextDiv.appendChild(blutext)
+   blutextDiv.appendChild(blutext1)
+   redTextDiv.appendChild(redtext)
+   redTextDiv.appendChild(redtext1)
+   blueInfoDiv.append(blutextDiv)
+   redInfoDiv.append(redTextDiv)
 
 
+    blueCastleInfo.appendChild(blueInfoDiv)
+    redCastleInfo.appendChild(redTextDiv)
 }
 function createDiv(text , element){ 
     const node = document.createTextNode(text);
@@ -62,6 +72,42 @@ img.alt = 'image'
 element.appendChild(img);
 }
 
+function UpdateGuerrierIuicons(castle , className , id){
+    const bg = document.getElementsByClassName(className)
+    for(let i = 0 ; i<bg.length ; i++){
+        // console.log(bg[i])c
+        var img = bg[i].children[0]
+    let cost = parseInt(bg[i].children[2].textContent[0])
+       if(castle.resource < cost){
+           img.classList.remove('guerrierIconValid')
+           img.classList.add('guerrierIconInvalid')
+       }
+    }
+ const text = document.getElementById(id)
+ text.textContent = `resorces: ${castle.resource} wining rounds : ${castle.winingRounds}`
+}
+function showGuerrier(castle , info , className ){
+    castle.availableGuerrier.map(guerrier =>{
+        var div1 = document.createElement('div');
+        div1.classList.add(className)
+        div1.style.display = "flex"
+        div1.style.alignItems = "center"
+        div1.style.flexDirection = "column"
+        div1.style.gap = ".5rem"
+        div1.style.height = "60px"
+        div1.style.width = "100%"
+        createImg(guerrier.image , div1 , castle.resource >= guerrier.resource)
+        createDiv(guerrier.name , div1)
+        createDiv(`${guerrier.resource} coins` , div1)
+
+        info.appendChild(div1)
+
+        // redGuerrirList = document.createElement('div');
+        // redCastleInfo.appendChild(redGuerrirList)
+
+    })
+}
+
 
 function bleuCastleHover(){
     const audio = new Audio("sounds/hover.mp3")
@@ -75,21 +121,30 @@ function redCastleHover(){
 function chooseGuerrier(guerrier , castle , list){
     let name  = guerrier.children[1].textContent
     let image  = guerrier.children[0].src
+    var audio ;
     switch(true){
         case name=== "elf" && castle.resource>=2 : 
+        audio = new Audio("sounds/elfVoice.mp3")
+       audio.play();
             castle.chosenGuerrier.push(new Elf(image))
             attachGuerrirToUilist(castle ,list)
         break;
         case name==="nain" && castle.resource>=1 : 
+        audio = new Audio("sounds/nainVoice.mp3")
+       audio.play();
             castle.chosenGuerrier.push(new Nain(image))
             attachGuerrirToUilist(castle , list)
 
         break;
         case name==="chefNain" && castle.resource>=3 :
+            audio = new Audio("sounds/chefNainVoice.mp3")
+            audio.play();
             castle.chosenGuerrier.push(new ChefNain(image))
             attachGuerrirToUilist(castle , list)
         break;
         case name=== "chefElf" && castle.resource>=4 :
+            audio = new Audio("sounds/chefElfVoice.mp3")
+            audio.play();
             castle.chosenGuerrier.push(new ChefElf(image))
             attachGuerrirToUilist(castle ,list)
         break;
@@ -103,8 +158,7 @@ function showFullInfo(){
     guerrierInfo.style.width ="100%"
     guerrierInfo.style.height ="60%"
     guerrierInfo.style.display ="flex"
-    // guerrierInfo.style.backgroundColor ="red"
-    guerrierInfo.style.alignItems = "center"
+    guerrierInfo.style.alignItems = "start"
     guerrierInfo.style.paddingTop = "1rem"
     guerrierInfo.style.borderBottom = "lightgray 1px solid"
     guerrierInfo.style.gap = "space-event"
@@ -124,30 +178,14 @@ function showFullInfo(){
     blueCastleInfo.appendChild(blueGuerrierList)
     // -----------------------------
 
+   showGuerrier(blueCastle , guerrierInfo , "bleuGuerrier")
 
-
-    blueCastle.availableGuerrier.map(guerrier =>{
-       var div1 = document.createElement('div');
-        div1.classList.add("bleuGuerrier")
-        div1.style.display = "flex"
-        div1.style.justifyContent = "center"
-        div1.style.alignItems = "center"
-        div1.style.flexDirection = "column"
-        div1.style.gap = ".5rem"
-        div1.style.height = "50px"
-        div1.style.width = "100%"
-        // div1.style.backgroundColor = "red"
-
-
-        createImg(guerrier.image , div1 , blueCastle.resource >= guerrier.resource)
-        createDiv(guerrier.name , div1)
-        createDiv(`${guerrier.resource} coins` , div1)
-
-        guerrierInfo.appendChild(div1)
-    })
     var blueGuerrirList = document.getElementsByClassName("bleuGuerrier")
     for(let i =0 ; i< blueGuerrirList.length ; i++){
-        blueGuerrirList[i].addEventListener("click" , function(){chooseGuerrier(this , blueCastle , blueGuerrierList)})
+        blueGuerrirList[i].addEventListener("click" , function(){
+            chooseGuerrier(this , blueCastle , blueGuerrierList)
+            UpdateGuerrierIuicons(blueCastle , "bleuGuerrier" , "blueText")
+        })
     }
     console.log(blueCastle.chosenGuerrier)
     blueCastleInfo.classList.add("strechInfoBlue")
@@ -158,7 +196,6 @@ function showFullInfoRed(){
     guerrierInfo.style.width ="100%"
     guerrierInfo.style.height ="60%"
     guerrierInfo.style.display ="flex"
-    // guerrierInfo.style.backgroundColor ="red"
     guerrierInfo.style.alignItems = "start"
     guerrierInfo.style.paddingTop = "1rem"
     guerrierInfo.style.borderBottom = "lightgray 1px solid"
@@ -176,30 +213,18 @@ function showFullInfoRed(){
 
 
     // ----------------------
-    redCastle.availableGuerrier.map(guerrier =>{
-        var div1 = document.createElement('div');
-        div1.classList.add("redGuerrier")
-        div1.style.display = "flex"
-        div1.style.alignItems = "center"
-        div1.style.flexDirection = "column"
-        div1.style.gap = ".5rem"
-        div1.style.height = "60px"
-        div1.style.width = "100%"
-        createImg(guerrier.image , div1 , redCastle.resource >= guerrier.resource)
-        createDiv(guerrier.name , div1)
-        createDiv(`${guerrier.resource} coins` , div1)
-
-        guerrierInfo.appendChild(div1)
-
-        // redGuerrirList = document.createElement('div');
-        // redCastleInfo.appendChild(redGuerrirList)
-
-    })
+   showGuerrier(redCastle , guerrierInfo , "redGuerrier")
     redCastleInfo.classList.add("strechInfoRed")
 
     var redGuerrirList = document.getElementsByClassName("redGuerrier")
     for(let i =0 ; i< redGuerrirList.length ; i++){
-        redGuerrirList[i].addEventListener("click" , function(){chooseGuerrier(this , redCastle ,redGuerrierList)})
+        redGuerrirList[i].addEventListener("click" , function(){
+            chooseGuerrier(this , redCastle ,redGuerrierList)
+            UpdateGuerrierIuicons(redCastle , "redGuerrier" , "redText")
+        }
+            
+            
+        )
     }
 }
 img.addEventListener("mouseover" , bleuCastleHover)
@@ -219,6 +244,10 @@ function attachGuerrirToUilist(castle ,list){
     img2.style.height= "65px"
     list.appendChild(img2)
 // })
+
+
+
+
 
 }
 document.addEventListener("DOMContentLoaded"  , loadUi);
