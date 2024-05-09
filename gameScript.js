@@ -16,7 +16,8 @@ var blueCastle = new Castle("images/bleucastle2.png",
    ["images/elfRed.jpeg","images/chefElfRed.jpeg","images/nainRed.jpeg","images/chefNainRed.jpeg"]
 
    )
-   var guerrierList
+   var blueGuerrierList
+   var redGuerrierList
 //    var blueGuerrirList = [] ;
     var chosenGuerrier = new Array
 function loadUi(){
@@ -71,26 +72,26 @@ function redCastleHover(){
     const audio = new Audio("sounds/hover.mp3")
     audio.play();
 }
-function chooseGuerrier(guerrier , castle){
+function chooseGuerrier(guerrier , castle , list){
     let name  = guerrier.children[1].textContent
     let image  = guerrier.children[0].src
     switch(true){
-        case name=== "elf" && blueCastle.resource>=1 : 
+        case name=== "elf" && castle.resource>=2 : 
             castle.chosenGuerrier.push(new Elf(image))
-            attachGuerrirToUilist()
+            attachGuerrirToUilist(castle ,list)
         break;
-        case name==="nain" && blueCastle.resource>=2 : 
+        case name==="nain" && castle.resource>=1 : 
             castle.chosenGuerrier.push(new Nain(image))
-            attachGuerrirToUilist()
+            attachGuerrirToUilist(castle , list)
 
         break;
-        case name==="chefNain" && blueCastle.resource>=3 :
+        case name==="chefNain" && castle.resource>=3 :
             castle.chosenGuerrier.push(new ChefNain(image))
-            attachGuerrirToUilist()
+            attachGuerrirToUilist(castle , list)
         break;
-        case name=== "chefElf" && blueCastle.resource>=4 :
+        case name=== "chefElf" && castle.resource>=4 :
             castle.chosenGuerrier.push(new ChefElf(image))
-            attachGuerrirToUilist()
+            attachGuerrirToUilist(castle ,list)
         break;
         default :console.log('jqdsfklajs')
     }
@@ -111,15 +112,17 @@ function showFullInfo(){
 
 
     blueCastleInfo.appendChild(guerrierInfo)
+    // --------------------------------------
 
-    guerrierList = document.createElement('div');
-    guerrierList.style.width= "100%"
-    guerrierList.style.height= "20%"
-    guerrierList.style.display ="flex"
+    blueGuerrierList = document.createElement('div');
+    blueGuerrierList.style.width= "100%"
+    blueGuerrierList.style.height= "20%"
+    blueGuerrierList.style.display ="flex"
 
-    guerrierList.style.alignItems = "start"
+    blueGuerrierList.style.alignItems = "start"
 
-    blueCastleInfo.appendChild(guerrierList)
+    blueCastleInfo.appendChild(blueGuerrierList)
+    // -----------------------------
 
 
 
@@ -144,7 +147,7 @@ function showFullInfo(){
     })
     var blueGuerrirList = document.getElementsByClassName("bleuGuerrier")
     for(let i =0 ; i< blueGuerrirList.length ; i++){
-        blueGuerrirList[i].addEventListener("click" , function(){chooseGuerrier(this , blueCastle)})
+        blueGuerrirList[i].addEventListener("click" , function(){chooseGuerrier(this , blueCastle , blueGuerrierList)})
     }
     console.log(blueCastle.chosenGuerrier)
     blueCastleInfo.classList.add("strechInfoBlue")
@@ -164,13 +167,18 @@ function showFullInfoRed(){
 
 
     redCastleInfo.appendChild(guerrierInfo)
+// -----------------------------------------------------
+    redGuerrierList = document.createElement('div');
+    redGuerrierList.style.width= "100%"
+    redGuerrierList.style.height= "20%"
+    redGuerrierList.style.display ="flex"
+    redCastleInfo.appendChild(redGuerrierList)
 
-    var guerrierList = document.createElement('div');
-    guerrierList.style.width= "100%"
-    guerrierList.style.height= "20%"
-    redCastleInfo.appendChild(guerrierList)
+
+    // ----------------------
     redCastle.availableGuerrier.map(guerrier =>{
         var div1 = document.createElement('div');
+        div1.classList.add("redGuerrier")
         div1.style.display = "flex"
         div1.style.alignItems = "center"
         div1.style.flexDirection = "column"
@@ -183,8 +191,16 @@ function showFullInfoRed(){
 
         guerrierInfo.appendChild(div1)
 
+        // redGuerrirList = document.createElement('div');
+        // redCastleInfo.appendChild(redGuerrirList)
+
     })
     redCastleInfo.classList.add("strechInfoRed")
+
+    var redGuerrirList = document.getElementsByClassName("redGuerrier")
+    for(let i =0 ; i< redGuerrirList.length ; i++){
+        redGuerrirList[i].addEventListener("click" , function(){chooseGuerrier(this , redCastle ,redGuerrierList)})
+    }
 }
 img.addEventListener("mouseover" , bleuCastleHover)
 img.addEventListener("click" , showFullInfo)
@@ -193,14 +209,15 @@ img1.addEventListener("click" , showFullInfoRed)
 
 img1.addEventListener("mouseover" , redCastleHover)
 
-function attachGuerrirToUilist(){
+function attachGuerrirToUilist(castle ,list){
 // blueCastle.chosenGuerrier.forEach(e=>{
 //     console.log(e)
     var img2 = document.createElement('img')
-    img2.src=blueCastle.chosenGuerrier[blueCastle.chosenGuerrier.length-1].image
+    castle.resource -= castle.chosenGuerrier[castle.chosenGuerrier.length-1].resource
+    img2.src=castle.chosenGuerrier[castle.chosenGuerrier.length-1].image
     img2.style.width= "50px"
     img2.style.height= "65px"
-    guerrierList.appendChild(img2)
+    list.appendChild(img2)
 // })
 
 }
