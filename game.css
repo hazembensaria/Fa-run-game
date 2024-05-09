@@ -55,7 +55,7 @@
     height: 50px;
     border-radius: 10px;
     background-color: #fff;
-    position: relative;
+    position: absolute;
     top: 37%;
     left: 72%;
     display: flex;
@@ -70,7 +70,7 @@
     height: 50px;
     border-radius: 10px;
     background-color: #fff;
-    position: relative;
+    position: absolute;
     top: 10%;
     left: 23%;
     display: flex;
@@ -86,9 +86,11 @@
     transform: rotate(45deg);
     background-color: white;
     position: absolute;
-    top: 40px;
+    top: 80%;
     left: 45%;
     z-index: 555;
+    transition: all ease-in-out .5s;
+
 }
 #trRed{
     width: 20px;
@@ -96,11 +98,52 @@
     transform: rotate(45deg);
     background-color: white;
     position: absolute;
-    top: 15px;
+    top: 30%;
     left: -8px;
     z-index: 555;
+    transition: all ease-in-out .5s;
 }
+.strechInfoBlue{
+    height: 300px !important;
+    top: 5% !important;
+    transition: all ease-in-out .5s;
+    flex-direction: column;
+    align-items: start !important;
+}
+.strechInfoRed{
+    height: 300px !important;
+    top: 5% !important;
+    transition: all ease-in-out .5s;
+    flex-direction: column;
+    align-items: start !important;
+}
+.guerrierIconValid:hover{
+    cursor: pointer;
+    width: 100px !important;
+    height: 100px !important;
+    transition: all ease-in-out .2s;
 
+}
+.guerrierIconInvalid{
+    transition: all ease-in-out .2s;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    filter: grayscale(100%);
+}
+.guerrierIconInvalid:hover{
+    cursor:not-allowed;
+    width: 100px !important;
+    height: 100px !important;
+    transition: all ease-in-out .2s;
+
+}
+.guerrierIconValid{
+    transition: all ease-in-out .2s;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
 @keyframes ds{
     0%{
         transform: translateY(0);
