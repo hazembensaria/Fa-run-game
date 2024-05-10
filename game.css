@@ -144,6 +144,9 @@
     height: 80px;
     border-radius: 50%;
 }
+.chosenGuerrier:hover{
+    cursor: pointer;
+}
 @keyframes ds{
     0%{
         transform: translateY(0);

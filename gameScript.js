@@ -43,6 +43,13 @@ function loadUi(){
    const redInfoDiv = document.createElement('div')
    blutextDiv.id = "blueText"
    redTextDiv.id = "redText"
+   redTextDiv.style.display = "flex"
+   redTextDiv.style.justifyContent = "center"
+   redTextDiv.style.width = "400px"
+   blutextDiv.style.display = "flex"
+   blutextDiv.style.justifyContent = "center"
+   blutextDiv.style.width = "400px"
+
    blutextDiv.appendChild(blutext)
    blutextDiv.appendChild(blutext1)
    redTextDiv.appendChild(redtext)
@@ -77,8 +84,8 @@ function UpdateGuerrierIuicons(castle , className , id){
     for(let i = 0 ; i<bg.length ; i++){
         // console.log(bg[i])c
         var img = bg[i].children[0]
-    let cost = parseInt(bg[i].children[2].textContent[0])
-       if(castle.resource < cost){
+        let cost = parseInt(bg[i].children[2].textContent[0])
+        if(castle.resource < cost){
            img.classList.remove('guerrierIconValid')
            img.classList.add('guerrierIconInvalid')
        }
@@ -118,35 +125,35 @@ function redCastleHover(){
     const audio = new Audio("sounds/hover.mp3")
     audio.play();
 }
-function chooseGuerrier(guerrier , castle , list){
+function chooseGuerrier(guerrier , castle , uiList){
     let name  = guerrier.children[1].textContent
     let image  = guerrier.children[0].src
     var audio ;
     switch(true){
         case name=== "elf" && castle.resource>=2 : 
-        audio = new Audio("sounds/elfVoice.mp3")
-       audio.play();
+            audio = new Audio("sounds/elfVoice.mp3")
+            audio.play();
             castle.chosenGuerrier.push(new Elf(image))
-            attachGuerrirToUilist(castle ,list)
+            attachGuerrirToUilist(castle ,uiList)
         break;
         case name==="nain" && castle.resource>=1 : 
-        audio = new Audio("sounds/nainVoice.mp3")
-       audio.play();
+            audio = new Audio("sounds/nainVoice.mp3")
+            audio.play();
             castle.chosenGuerrier.push(new Nain(image))
-            attachGuerrirToUilist(castle , list)
+            attachGuerrirToUilist(castle , uiList)
 
         break;
         case name==="chefNain" && castle.resource>=3 :
             audio = new Audio("sounds/chefNainVoice.mp3")
             audio.play();
             castle.chosenGuerrier.push(new ChefNain(image))
-            attachGuerrirToUilist(castle , list)
+            attachGuerrirToUilist(castle , uiList)
         break;
         case name=== "chefElf" && castle.resource>=4 :
             audio = new Audio("sounds/chefElfVoice.mp3")
             audio.play();
             castle.chosenGuerrier.push(new ChefElf(image))
-            attachGuerrirToUilist(castle ,list)
+            attachGuerrirToUilist(castle ,uiList)
         break;
         default :console.log('jqdsfklajs')
     }
@@ -233,7 +240,9 @@ img1.addEventListener("click" , showFullInfoRed)
 
 
 img1.addEventListener("mouseover" , redCastleHover)
-
+function removeGuerrier(){
+    
+}
 function attachGuerrirToUilist(castle ,list){
 // blueCastle.chosenGuerrier.forEach(e=>{
 //     console.log(e)
@@ -242,12 +251,9 @@ function attachGuerrirToUilist(castle ,list){
     img2.src=castle.chosenGuerrier[castle.chosenGuerrier.length-1].image
     img2.style.width= "50px"
     img2.style.height= "65px"
+    img2.classList.add("chosenGuerrier")
     list.appendChild(img2)
+    img2.addEventListener("click" , removeGuerrier)
 // })
-
-
-
-
-
 }
 document.addEventListener("DOMContentLoaded"  , loadUi);
