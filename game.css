@@ -43,7 +43,7 @@
     left: 7%;
 }
 .container{
-    background-image: url("images/photoshop.png");
+    background-image: url("images/photoshop3.png");
     height: 100vh;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -170,4 +170,97 @@
     100%{
         transform: translateX(0);
     }
+}
+
+/* -------------------------------------------- */
+
+.test{
+    position: absolute;
+    top: 77.5%;
+    left: 56%;
+    width: 315px;
+    height: 160px;
+    filter: drop-shadow(1px 1px 1px blue);
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
+}
+.test1{
+    position: absolute;
+    top:73%;
+    left: 48%;
+    width: 300px;
+    height: 145px;
+    filter: drop-shadow(1px 1px 1px rgb(177, 71, 0));
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
+}
+.test2{
+    position: absolute;
+    top:68.5%;
+    left: 40%;
+    width: 285px;
+    height: 130px;
+    filter: drop-shadow(1px 1px 1px rgb(177, 0, 115));
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
+}
+.test3{
+    position: absolute;
+    top:65%;
+    left: 32%;
+    width: 270px;
+    height: 115px;
+    filter: drop-shadow(1px 1px 1px rgb(0, 177, 38));
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
+}
+.test4{
+    position: absolute;
+    top:61.8%;
+    left: 24.5%;
+    width: 255px;
+    height: 100px;
+    filter: drop-shadow(1px 1px 1px rgb(142, 61, 8));
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
+}
+.test5{
+    position: absolute;
+    top:59.3%;
+    left: 17.5%;
+    width: 240px;
+    height: 85px;
+    filter: drop-shadow(1px 1px 1px rgb(6, 37, 130));
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
+}
+.test6{
+    position: absolute;
+    top:56%;
+    left: 11%;
+    width: 225px;
+    height: 80px;
+    filter: drop-shadow(1px 1px 1px rgb(213, 131, 64));
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
+}
+.test7{
+    position: absolute;
+    top:52.7%;
+    left: 5%;
+    width: 210px;
+    height: 80px;
+    filter: drop-shadow(1px 1px 1px rgb(39, 10, 134));
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
+}
+.test8{
+    position: absolute;
+    top:48.2%;
+    left: 5.4%;
+    width: 172px;
+    height: 85px;
+    filter: drop-shadow(1px 1px 1px rgb(39, 10, 134));
+    /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
+    /* clip-path:circle(50%) */
 }
