@@ -5,7 +5,7 @@ export default class Road{
     constructor(){
         this.bluePosition = 0
         this.redPosition = 8
-        this.readTeams = 0 ;
+        this.readyTeamsToFight = 0 ;
         for(let i =0 ; i< 9 ; i++){
             this.plateList.push(new Plate());
         }

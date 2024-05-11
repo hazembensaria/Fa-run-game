@@ -169,8 +169,8 @@ function chooseGuerrier(guerrier , castle , uiList){
 
     console.log(blueCastle.chosenGuerrier)
 }
-function moveBlue(){
-    console.log(road.plateList[road.bluePosition].blueGuerrierFighters)
+function moveBlue(callBack){
+    // console.log(road.plateList[road.bluePosition].blueGuerrierFighters)
     road.plateList[road.bluePosition].blueGuerrierFighters = []
     road.plateList[road.bluePosition].eraiseFighters()
     road.bluePosition++ ;
@@ -185,17 +185,19 @@ function moveBlue(){
     }
     setTimeout(function() {
         if (road.bluePosition!== road.redPosition) {
-            moveRed();
+            moveRed(callBack);
         }
-    }, 2000);
+        else
+        callBack()
+    }, 1000);
 }
-function moveRed(){
-    console.log(road.plateList[road.redPosition].redGuerrierFighters)
+function moveRed(callBack){
+    // console.log(road.plateList[road.redPosition].redGuerrierFighters)
 
     road.plateList[road.redPosition].redGuerrierFighters = []
     road.plateList[road.redPosition].eraiseFighters()
     road.redPosition-- ;
-    console.log(road.redPosition)
+    // console.log(road.redPosition)
     road.plateList[road.redPosition].uiPlate.firstChild.style.justifyContent= "end"
     road.plateList[road.redPosition].redGuerrierFighters = redCastle.chosenGuerrier
     road.plateList[road.redPosition].drowFighters(redCastle.chosenGuerrier , "red" , "50px" , "70px" , "-45%", "30%")
@@ -205,13 +207,25 @@ function moveRed(){
     }
     setTimeout(function() {
         if (road.bluePosition!== road.redPosition) {
-            moveBlue();
+            moveBlue(callBack);
         }
-    }, 2000);
+        else
+        callBack()
+    }, 1000);
 }
-function startFight(){
 
-setTimeout(moveBlue , 2000)  
+function startSequence(callBack){
+    setTimeout(function(){moveBlue(callBack)} , 1000)
+}
+async function startFight(){
+
+startSequence(()=>{
+    console.log('i am completeed!!!!!!!!!')
+    console.log(road.plateList[road.bluePosition].blueGuerrierFighters)
+    console.log(road.plateList[road.redPosition].redGuerrierFighters)
+})
+
+
 }
 function teamIsReady(castle , castleInfoUi ){
     if(castle.name==="blue"){
@@ -225,10 +239,10 @@ function teamIsReady(castle , castleInfoUi ){
         castleInfoUi.classList.add("shrinkInfoBlue")
         castleInfoUi.classList.remove("strechInfoBlue") //blueCastleInfo
     }else{  
-        console.log(road.plateList[8].uiPlate.style)
-        road.plateList[8].uiPlate.firstChild.style.justifyContent= "start"
-        road.plateList[8].redGuerrierFighters = castle.chosenGuerrier
-        road.plateList[8].drowFighters(castle.chosenGuerrier , "red" , "50px" , "70px" , "-50%", "30%")
+        // console.log(road.plateList[8].uiPlate.style)
+        road.plateList[road.redPosition].uiPlate.firstChild.style.justifyContent= "start"
+        road.plateList[road.redPosition].redGuerrierFighters = castle.chosenGuerrier
+        road.plateList[road.redPosition].drowFighters(castle.chosenGuerrier , "red" , "50px" , "70px" , "-50%", "30%")
         var bb = document.getElementsByClassName('chosenGuerrierred')
         for(let i =0 ; i< bb.length ; i++){
             bb[i].style.transform= "scale(0)"
@@ -238,7 +252,7 @@ function teamIsReady(castle , castleInfoUi ){
     }
    
     
-    if(++road.readTeams===2)
+    if(++road.readyTeamsToFight===2)
         {startFight()}
  
 
