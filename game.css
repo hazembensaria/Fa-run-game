@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 .redCastle{
-    
+    z-index: 0;
     position: absolute;
     width: 277px;
     top: 1.8%;
@@ -209,7 +209,7 @@
     /* clip-path:circle(50%) */
 }
 #test1{
-    z-index: 0;
+    z-index: 98;
     background-image: url("images/stonc1.png");
     background-size: 100% 100%;
     position: absolute;
@@ -221,6 +221,8 @@
     /* clip-path:circle(50%) */
 }
 #test2{
+    z-index: 99;
+
     background-image: url("images/stonc1.png");
     background-size: 100% 100%;
     position: absolute;
@@ -232,6 +234,8 @@
     /* clip-path:circle(50%) */
 }
 #test3{
+    z-index: 99;
+
     background-image: url("images/stonc1.png");
     background-size: 100% 100%;
     position: absolute;
@@ -243,6 +247,8 @@
     /* clip-path:circle(50%) */
 }
 #test4{
+    z-index: 99;
+
     background-image: url("images/stonc1.png");
     background-size: 100% 100%;
     position: absolute;
@@ -254,6 +260,8 @@
     /* clip-path:circle(50%) */
 }
 #test5{
+    z-index: 99;
+
     background-image: url("images/stonc1.png");
     background-size: 100% 100%;
     position: absolute;
@@ -265,6 +273,8 @@
     /* clip-path:circle(50%) */
 }
 #test6{
+    z-index: 99;
+
     background-image: url("images/stonc1.png");
     background-size: 100% 100%;
     position: absolute;
@@ -276,6 +286,8 @@
     /* clip-path:circle(50%) */
 }
 #test7{
+    z-index: 99;
+
     background-image: url("images/stonc1.png");
     background-size: 100% 100%;
     position: absolute;
@@ -287,6 +299,7 @@
     /* clip-path:circle(50%) */
 }
 #test8{
+    z-index: 99;
     background-image: url("images/stone3.png");
     background-size: 100% 100%;
     position: absolute;

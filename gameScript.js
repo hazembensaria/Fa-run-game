@@ -169,11 +169,55 @@ function chooseGuerrier(guerrier , castle , uiList){
 
     console.log(blueCastle.chosenGuerrier)
 }
-function startFight(castle , castleInfoUi ){
+function moveBlue(){
+    console.log(road.plateList[road.bluePosition].blueGuerrierFighters)
+    road.plateList[road.bluePosition].blueGuerrierFighters = []
+    road.plateList[road.bluePosition].eraiseFighters()
+    road.bluePosition++ ;
+    console.log(road.bluePosition)
+
+    road.plateList[road.bluePosition].uiPlate.firstChild.style.justifyContent= "end"
+    road.plateList[road.bluePosition].blueGuerrierFighters = blueCastle.chosenGuerrier
+    road.plateList[road.bluePosition].drowFighters(blueCastle.chosenGuerrier , "blue" , "60px" , "80px" ,"45%" ,"-30%")
+    var bb = document.getElementsByClassName('chosenGuerrierblue')
+    for(let i =0 ; i< bb.length ; i++){
+        bb[i].style.transform= "scale(0)"   
+    }
+    setTimeout(function() {
+        if (road.bluePosition!== road.redPosition) {
+            moveRed();
+        }
+    }, 2000);
+}
+function moveRed(){
+    console.log(road.plateList[road.redPosition].redGuerrierFighters)
+
+    road.plateList[road.redPosition].redGuerrierFighters = []
+    road.plateList[road.redPosition].eraiseFighters()
+    road.redPosition-- ;
+    console.log(road.redPosition)
+    road.plateList[road.redPosition].uiPlate.firstChild.style.justifyContent= "end"
+    road.plateList[road.redPosition].redGuerrierFighters = redCastle.chosenGuerrier
+    road.plateList[road.redPosition].drowFighters(redCastle.chosenGuerrier , "red" , "50px" , "70px" , "-45%", "30%")
+    var bb = document.getElementsByClassName('chosenGuerrierred')
+    for(let i =0 ; i< bb.length ; i++){
+        bb[i].style.transform= "scale(0)"
+    }
+    setTimeout(function() {
+        if (road.bluePosition!== road.redPosition) {
+            moveBlue();
+        }
+    }, 2000);
+}
+function startFight(){
+
+setTimeout(moveBlue , 2000)  
+}
+function teamIsReady(castle , castleInfoUi ){
     if(castle.name==="blue"){
-        road.plateList[0].uiPlate.firstChild.style.justifyContent= "end"
-        road.plateList[0].blueGuerrierFighters = blueCastle.chosenGuerrier
-        road.plateList[0].drowFighters(blueCastle.chosenGuerrier , "blue" , "60px" , "80px")
+        road.plateList[road.bluePosition].uiPlate.firstChild.style.justifyContent= "end"
+        road.plateList[road.bluePosition].blueGuerrierFighters = blueCastle.chosenGuerrier
+        road.plateList[road.bluePosition].drowFighters(blueCastle.chosenGuerrier , "blue" , "60px" , "80px" ,"45%" ,"-30%")
         var bb = document.getElementsByClassName('chosenGuerrierblue')
         for(let i =0 ; i< bb.length ; i++){
             bb[i].style.transform= "scale(0)"
@@ -184,7 +228,7 @@ function startFight(castle , castleInfoUi ){
         console.log(road.plateList[8].uiPlate.style)
         road.plateList[8].uiPlate.firstChild.style.justifyContent= "start"
         road.plateList[8].redGuerrierFighters = castle.chosenGuerrier
-        road.plateList[8].drowFighters(castle.chosenGuerrier , "red" , "40px" , "60px")
+        road.plateList[8].drowFighters(castle.chosenGuerrier , "red" , "50px" , "70px" , "-50%", "30%")
         var bb = document.getElementsByClassName('chosenGuerrierred')
         for(let i =0 ; i< bb.length ; i++){
             bb[i].style.transform= "scale(0)"
@@ -192,7 +236,11 @@ function startFight(castle , castleInfoUi ){
         castleInfoUi.classList.add("shrinkInfoRed")
         castleInfoUi.classList.remove("strechInfoRed") //redCastleInfo
     }
+   
     
+    if(++road.readTeams===2)
+        {startFight()}
+ 
 
 }
 function showFullInfo(){
@@ -236,7 +284,7 @@ function showFullInfo(){
     playButton.style.textAlign= "center"
     playButton.style.color= "white"
 playButton.addEventListener("click" , function(){
-    startFight(blueCastle , blueCastleInfo)
+    teamIsReady(blueCastle , blueCastleInfo)
 })
 
     playButton.textContent ="go fight"
@@ -301,7 +349,7 @@ function showFullInfoRed(){
     playButton1.style.textAlign= "center"
     playButton1.style.color= "white"
     playButton1.addEventListener("click" , function(){
-        startFight(redCastle , redCastleInfo)
+        teamIsReady(redCastle , redCastleInfo)
     })
 
     playButton1.textContent ="go fight"

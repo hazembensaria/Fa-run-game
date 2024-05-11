@@ -10,11 +10,13 @@ export default class Plate{
     setUiPlate(uiPlate){
         this.uiPlate = uiPlate ;
     }
-    drowFighters(fightersList , color , width , height){
+    drowFighters(fightersList , color , width , height , top , left){
         this.uiPlate.style.filter = `drop-shadow(4px 7px 4px ${color})`
+        this.uiPlate.firstChild.style.top = top
+        this.uiPlate.firstChild.style.left = left
         for(let i =0 ; i< fightersList.length ; i++){
             var img = document.createElement('div');
-            // img.style.border = "1px black solid"
+            // this.uiPlate.firstChild.style.border = "1px black solid"
             img.style.width = width
             img.style.height = height
             img.style.zIndex = "999"
@@ -26,5 +28,14 @@ export default class Plate{
 
         this.uiPlate.firstChild.appendChild(img)
         }
+    }
+    eraiseFighters(){
+        while (this.uiPlate.firstChild) {
+            this.uiPlate.removeChild(this.uiPlate.firstChild);
+        }
+        this.uiPlate.style.filter = ``
+        this.uiPlate.style.zIndex = '98'
+
+        
     }
 }
