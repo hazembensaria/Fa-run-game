@@ -10,11 +10,13 @@ var img1 = document.createElement('img');
 var blueCastleInfo = document.getElementById('blueCastleInfo')
 var redCastleInfo = document.getElementById('redCastleInfo')
 var blueCastle = new Castle("images/bleucastle2.png",
-    ["images/elfBlue.jpeg","images/chefElfBlue.jpeg","images/nainBlue.jpeg","images/chefNainBlue.jpeg"]
+    ["images/elfBlue.jpeg","images/chefElfBlue.jpeg","images/nainBlue.jpeg","images/chefNainBlue.jpeg" ],
+    "blue"
    )
-   var redCastle = new Castle("images/redcastle2.png",
-   ["images/elfRed.jpeg","images/chefElfRed.jpeg","images/nainRed.jpeg","images/chefNainRed.jpeg"]
-
+   var redCastle = new Castle(
+    "images/redcastle2.png",
+   ["images/elfRed.jpeg","images/chefElfRed.jpeg","images/nainRed.jpeg","images/chefNainRed.jpeg" ],
+   "red"
    )
    var blueGuerrierList
    var redGuerrierList
@@ -88,6 +90,9 @@ function UpdateGuerrierIuicons(castle , className , id){
         if(castle.resource < cost){
            img.classList.remove('guerrierIconValid')
            img.classList.add('guerrierIconInvalid')
+       }else{
+        img.classList.add('guerrierIconValid')
+        img.classList.remove('guerrierIconInvalid')
        }
     }
  const text = document.getElementById(id)
@@ -240,8 +245,24 @@ img1.addEventListener("click" , showFullInfoRed)
 
 
 img1.addEventListener("mouseover" , redCastleHover)
-function removeGuerrier(){
-    
+
+
+function removeGuerrier(element , castle){
+    console.log(castle)
+ if(castle.name ==="blue"){
+    blueGuerrierList.removeChild(element)
+    blueCastle.chosenGuerrier.splice(element.getAttribute("number") ,1)
+    blueCastle.resource+= parseInt(element.getAttribute("cost"))
+    UpdateGuerrierIuicons(blueCastle , "bleuGuerrier" , "blueText")
+ }
+ else{
+    redGuerrierList.removeChild(element)
+    redCastle.chosenGuerrier.splice(element.getAttribute("number") ,1)
+    redCastle.resource+= parseInt(element.getAttribute("cost"))
+    UpdateGuerrierIuicons(redCastle , "redGuerrier" , "redText")
+ }
+
+
 }
 function attachGuerrirToUilist(castle ,list){
 // blueCastle.chosenGuerrier.forEach(e=>{
@@ -251,9 +272,14 @@ function attachGuerrirToUilist(castle ,list){
     img2.src=castle.chosenGuerrier[castle.chosenGuerrier.length-1].image
     img2.style.width= "50px"
     img2.style.height= "65px"
-    img2.classList.add("chosenGuerrier")
+    img2.classList.add(`chosenGuerrier`)
+    img2.setAttribute("number" ,castle.chosenGuerrier.length-1)
+    img2.setAttribute("cost" ,castle.chosenGuerrier[castle.chosenGuerrier.length-1].resource)
+
     list.appendChild(img2)
-    img2.addEventListener("click" , removeGuerrier)
+    img2.addEventListener("click" , function(){
+       removeGuerrier(this , castle)
+    })
 // })
 }
 document.addEventListener("DOMContentLoaded"  , loadUi);

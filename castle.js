@@ -4,7 +4,8 @@ import Elf from "./elf.js";
 import Nain from "./nain.js";
 
  export default class Castle{
-    constructor(image , guerrirUi){
+    constructor(image , guerrirUi , name){
+        this.name = name
         this.image = image;
         this.resource = 3
         this.winingRounds = 0

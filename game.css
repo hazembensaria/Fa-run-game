@@ -130,6 +130,7 @@
     height: 80px;
     border-radius: 50%;
     filter: grayscale(100%);
+    opacity: .5;
 }
 .guerrierIconInvalid:hover{
     cursor:not-allowed;
