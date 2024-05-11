@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 .blueCastle{
+    z-index: 0;
     position: absolute;
     width: 450px;
     top: 47.5%;
@@ -16,9 +17,10 @@
     cursor: pointer;
 }
 .redCastle{
+    
     position: absolute;
     width: 277px;
-    top: -1%;
+    top: 1.8%;
     left: 2%;
 }
 .redCastle:hover{
@@ -36,7 +38,6 @@
 .stone{
     /* z-index: -1; */
     width: 210px;
-
     transform: rotate(-20deg);
     position: absolute;
     top: 40%;
@@ -106,7 +107,22 @@
 .strechInfoBlue{
     height: 300px !important;
     top: 5% !important;
-    transition: all ease-in-out .5s;
+    transition: all .5s ease-in-out ;
+    flex-direction: column;
+    align-items: start !important;
+}
+.shrinkInfoBlue{
+    height: 50px !important;
+    top: 37% !important;
+    transition: all .5s ease-in-out ;
+    flex-direction: column;
+    align-items: start !important;
+}
+
+.shrinkInfoRed{
+    height: 50px !important;
+    top: 10% !important;
+    transition: all .5s ease-in-out ;
     flex-direction: column;
     align-items: start !important;
 }
@@ -145,7 +161,13 @@
     height: 80px;
     border-radius: 50%;
 }
-.chosenGuerrier:hover{
+.chosenGuerrierblue{
+    transition: all .3s ease-in-out;
+}
+.chosenGuerrierblue:hover{
+    cursor: pointer;
+}
+.chosenGuerrierred:hover{
     cursor: pointer;
 }
 @keyframes ds{
@@ -174,93 +196,117 @@
 
 /* -------------------------------------------- */
 
-.test{
+#test0{
+    background-image: url("images/stonc1.png");
+    background-size: 100% 100%;
     position: absolute;
     top: 77.5%;
     left: 56%;
     width: 315px;
     height: 160px;
-    filter: drop-shadow(1px 1px 1px blue);
+    z-index: 99;
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
 }
-.test1{
+#test1{
+    z-index: 0;
+    background-image: url("images/stonc1.png");
+    background-size: 100% 100%;
     position: absolute;
     top:73%;
     left: 48%;
     width: 300px;
     height: 145px;
-    filter: drop-shadow(1px 1px 1px rgb(177, 71, 0));
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
 }
-.test2{
+#test2{
+    background-image: url("images/stonc1.png");
+    background-size: 100% 100%;
     position: absolute;
     top:68.5%;
     left: 40%;
     width: 285px;
     height: 130px;
-    filter: drop-shadow(1px 1px 1px rgb(177, 0, 115));
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
 }
-.test3{
+#test3{
+    background-image: url("images/stonc1.png");
+    background-size: 100% 100%;
     position: absolute;
     top:65%;
     left: 32%;
     width: 270px;
     height: 115px;
-    filter: drop-shadow(1px 1px 1px rgb(0, 177, 38));
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
 }
-.test4{
+#test4{
+    background-image: url("images/stonc1.png");
+    background-size: 100% 100%;
     position: absolute;
     top:61.8%;
     left: 24.5%;
     width: 255px;
     height: 100px;
-    filter: drop-shadow(1px 1px 1px rgb(142, 61, 8));
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
 }
-.test5{
+#test5{
+    background-image: url("images/stonc1.png");
+    background-size: 100% 100%;
     position: absolute;
     top:59.3%;
     left: 17.5%;
     width: 240px;
     height: 85px;
-    filter: drop-shadow(1px 1px 1px rgb(6, 37, 130));
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
 }
-.test6{
+#test6{
+    background-image: url("images/stonc1.png");
+    background-size: 100% 100%;
     position: absolute;
     top:56%;
     left: 11%;
     width: 225px;
     height: 80px;
-    filter: drop-shadow(1px 1px 1px rgb(213, 131, 64));
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
 }
-.test7{
+#test7{
+    background-image: url("images/stonc1.png");
+    background-size: 100% 100%;
     position: absolute;
     top:52.7%;
     left: 5%;
     width: 210px;
     height: 80px;
-    filter: drop-shadow(1px 1px 1px rgb(39, 10, 134));
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
 }
-.test8{
+#test8{
+    background-image: url("images/stone3.png");
+    background-size: 100% 100%;
     position: absolute;
     top:48.2%;
     left: 5.4%;
     width: 172px;
     height: 85px;
-    filter: drop-shadow(1px 1px 1px rgb(39, 10, 134));
+    /* filter: drop-shadow(1px 1px 1px rgb(39, 10, 134)); */
     /* clip-path:(0% 8%,41.00% 1.00%,100% 46%,37% 58%); */
     /* clip-path:circle(50%) */
+}
+.popUp{
+  animation: popup .5s ease-in-out;
+    /* transition: all .5s ease-in-out; */
+}
+@keyframes popup{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
 }

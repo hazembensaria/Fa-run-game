@@ -1,8 +1,9 @@
-import Castle from './castle.js'; 
+; import Castle from './castle.js'; 
 import ChefElf from './chefElf.js';
 import ChefNain from './chefNain.js';
 import Elf from './elf.js';
 import Nain from './nain.js';
+import Road from './road.js';
 import Stone from './stone.js'; 
 const Container = document.getElementById('container'); 
 var img = document.createElement('img');
@@ -10,20 +11,23 @@ var img1 = document.createElement('img');
 var blueCastleInfo = document.getElementById('blueCastleInfo')
 var redCastleInfo = document.getElementById('redCastleInfo')
 var blueCastle = new Castle("images/bleucastle2.png",
-    ["images/elfBlue.jpeg","images/chefElfBlue.jpeg","images/nainBlue.jpeg","images/chefNainBlue.jpeg" ],
+    ["images/elfBlue.png","images/chefElfBlue.png","images/nainBlue.png","images/chefNainBlue.png" ],
     "blue"
    )
    var redCastle = new Castle(
     "images/redcastle2.png",
-   ["images/elfRed.jpeg","images/chefElfRed.jpeg","images/nainRed.jpeg","images/chefNainRed.jpeg" ],
+   ["images/elfRed.png","images/chefElfRed.png","images/nainRed.png","images/chefNainRed.png" ],
    "red"
    )
+   var road = new Road();
    var blueGuerrierList
    var redGuerrierList
 //    var blueGuerrirList = [] ;
     
 function loadUi(){
-   
+   for(let i = 0; i<9 ; i++  ){
+    road.plateList[i].setUiPlate(document.getElementById(`test${i}`))
+   }
    console.log(blueCastle , redCastle)
    img.src = blueCastle.image
    img.alt = 'image'; 
@@ -165,7 +169,39 @@ function chooseGuerrier(guerrier , castle , uiList){
 
     console.log(blueCastle.chosenGuerrier)
 }
+function startFight(castle , castleInfoUi ){
+    if(castle.name==="blue"){
+        road.plateList[0].uiPlate.firstChild.style.justifyContent= "end"
+        road.plateList[0].blueGuerrierFighters = blueCastle.chosenGuerrier
+        road.plateList[0].drowFighters(blueCastle.chosenGuerrier , "blue" , "60px" , "80px")
+        var bb = document.getElementsByClassName('chosenGuerrierblue')
+        for(let i =0 ; i< bb.length ; i++){
+            bb[i].style.transform= "scale(0)"
+        }
+        castleInfoUi.classList.add("shrinkInfoBlue")
+        castleInfoUi.classList.remove("strechInfoBlue") //blueCastleInfo
+    }else{  
+        console.log(road.plateList[8].uiPlate.style)
+        road.plateList[8].uiPlate.firstChild.style.justifyContent= "start"
+        road.plateList[8].redGuerrierFighters = castle.chosenGuerrier
+        road.plateList[8].drowFighters(castle.chosenGuerrier , "red" , "40px" , "60px")
+        var bb = document.getElementsByClassName('chosenGuerrierred')
+        for(let i =0 ; i< bb.length ; i++){
+            bb[i].style.transform= "scale(0)"
+        }
+        castleInfoUi.classList.add("shrinkInfoRed")
+        castleInfoUi.classList.remove("strechInfoRed") //redCastleInfo
+    }
+    
+
+}
 function showFullInfo(){
+    if(blueCastleInfo.classList.contains("shrinkInfoBlue")){
+        blueCastleInfo.classList.remove("shrinkInfoBlue")
+        blueCastleInfo.classList.add("strechInfoBlue")
+
+    }
+    else{
     var guerrierInfo = document.createElement('div');
     guerrierInfo.style.width ="100%"
     guerrierInfo.style.height ="60%"
@@ -175,6 +211,8 @@ function showFullInfo(){
     guerrierInfo.style.borderBottom = "lightgray 1px solid"
     guerrierInfo.style.gap = "space-event"
     guerrierInfo.style.justifyContent = "center"
+    guerrierInfo.style.overflow = "hidden"
+
 
 
     blueCastleInfo.appendChild(guerrierInfo)
@@ -184,6 +222,25 @@ function showFullInfo(){
     blueGuerrierList.style.width= "100%"
     blueGuerrierList.style.height= "20%"
     blueGuerrierList.style.display ="flex"
+    blueGuerrierList.style.position ="relative"
+    blueGuerrierList.style.overflow = "hidden"
+
+    var playButton = document.createElement('div');
+    playButton.style.width= "18%"
+    playButton.style.height= "50%"
+    playButton.style.alignSelf= "center"
+    playButton.style.position= "absolute"
+    playButton.style.left= "80%"
+    playButton.style.backgroundColor= "blue"
+    playButton.style.borderRadius= "5px"    
+    playButton.style.textAlign= "center"
+    playButton.style.color= "white"
+playButton.addEventListener("click" , function(){
+    startFight(blueCastle , blueCastleInfo)
+})
+
+    playButton.textContent ="go fight"
+    blueGuerrierList.appendChild(playButton)
 
     blueGuerrierList.style.alignItems = "start"
 
@@ -201,9 +258,15 @@ function showFullInfo(){
     }
     console.log(blueCastle.chosenGuerrier)
     blueCastleInfo.classList.add("strechInfoBlue")
-
+}
 }
 function showFullInfoRed(){
+    if(redCastleInfo.classList.contains("shrinkInfoRed")){
+        redCastleInfo.classList.remove("shrinkInfoRed")
+        redCastleInfo.classList.add("strechInfoRed")
+
+    }
+    else{
     var guerrierInfo = document.createElement('div');
     guerrierInfo.style.width ="100%"
     guerrierInfo.style.height ="60%"
@@ -213,6 +276,7 @@ function showFullInfoRed(){
     guerrierInfo.style.borderBottom = "lightgray 1px solid"
     guerrierInfo.style.gap = "space-event"
     guerrierInfo.style.justifyContent = "center"
+    guerrierInfo.style.overflow = "hidden"
 
 
     redCastleInfo.appendChild(guerrierInfo)
@@ -221,6 +285,29 @@ function showFullInfoRed(){
     redGuerrierList.style.width= "100%"
     redGuerrierList.style.height= "20%"
     redGuerrierList.style.display ="flex"
+    redGuerrierList.style.overflow ="hidden"
+    redGuerrierList.style.display ="relative"
+
+
+
+    var playButton1 = document.createElement('div');
+    playButton1.style.width= "18%"
+    playButton1.style.height= "10%"
+    playButton1.style.alignSelf= "center"
+    playButton1.style.position= "absolute"
+    playButton1.style.left= "80%"
+    playButton1.style.backgroundColor= "red"
+    playButton1.style.borderRadius= "5px"    
+    playButton1.style.textAlign= "center"
+    playButton1.style.color= "white"
+    playButton1.addEventListener("click" , function(){
+        startFight(redCastle , redCastleInfo)
+    })
+
+    playButton1.textContent ="go fight"
+    redGuerrierList.appendChild(playButton1)
+    redGuerrierList.style.alignItems = "start"
+
     redCastleInfo.appendChild(redGuerrierList)
 
 
@@ -238,6 +325,8 @@ function showFullInfoRed(){
             
         )
     }
+
+}
 }
 img.addEventListener("mouseover" , bleuCastleHover)
 img.addEventListener("click" , showFullInfo)
@@ -272,7 +361,7 @@ function attachGuerrirToUilist(castle ,list){
     img2.src=castle.chosenGuerrier[castle.chosenGuerrier.length-1].image
     img2.style.width= "50px"
     img2.style.height= "65px"
-    img2.classList.add(`chosenGuerrier`)
+    img2.classList.add(`chosenGuerrier${castle.name}`)
     img2.setAttribute("number" ,castle.chosenGuerrier.length-1)
     img2.setAttribute("cost" ,castle.chosenGuerrier[castle.chosenGuerrier.length-1].resource)
 
