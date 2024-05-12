@@ -189,7 +189,7 @@ function moveBlue(callBack){
         }
         else
         callBack()
-    }, 100);
+    }, 1000);
 }
 function moveRed(callBack){
     // console.log(road.plateList[road.redPosition].redGuerrierFighters)
@@ -211,11 +211,11 @@ function moveRed(callBack){
         }
         else
         callBack()
-    }, 100);
+    }, 1000);
 }
 
 function startSequence(callBack){
-    setTimeout(function(){moveBlue(callBack)} , 100)
+    setTimeout(function(){moveBlue(callBack)} , 1000)
 }
 
 

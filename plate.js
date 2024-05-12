@@ -12,6 +12,7 @@ export default class Plate{
     }
     drowFighters(fightersList , color , width , height , top , left){
         this.uiPlate.style.filter = `drop-shadow(4px 7px 4px ${color})`
+        this.uiPlate.style.zIndex = `999`
         this.uiPlate.firstChild.style.top = top
         this.uiPlate.firstChild.style.left = left
         for(let i =0 ; i< fightersList.length ; i++){
