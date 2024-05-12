@@ -189,7 +189,7 @@ function moveBlue(callBack){
         }
         else
         callBack()
-    }, 1000);
+    }, 100);
 }
 function moveRed(callBack){
     // console.log(road.plateList[road.redPosition].redGuerrierFighters)
@@ -211,18 +211,56 @@ function moveRed(callBack){
         }
         else
         callBack()
-    }, 1000);
+    }, 100);
 }
 
 function startSequence(callBack){
-    setTimeout(function(){moveBlue(callBack)} , 1000)
+    setTimeout(function(){moveBlue(callBack)} , 100)
 }
 async function startFight(){
 
 startSequence(()=>{
     console.log('i am completeed!!!!!!!!!')
-    console.log(road.plateList[road.bluePosition].blueGuerrierFighters)
-    console.log(road.plateList[road.redPosition].redGuerrierFighters)
+    var platau = road.plateList[road.bluePosition]
+    console.log(road.plateList[road.bluePosition].blueGuerrierFighters.length)
+    // console.log(road.plateList[road.redPosition].redGuerrierFighters)
+    while(platau.blueGuerrierFighters.length!==0 || platau.redGuerrierFighters.length!==0){
+       for(let i = 0 ; i<  platau.blueGuerrierFighters.length ; i++){
+            platau.redGuerrierFighters[0].getDamage(platau.blueGuerrierFighters[0].attack())
+            //    }
+            if(platau.redGuerrierFighters[0].isKilled())
+                platau.redGuerrierFighters.shift()
+          
+            var firstItem = platau.blueGuerrierFighters.shift();
+
+            platau.blueGuerrierFighters.push(firstItem);
+
+            if(platau.redGuerrierFighters.length===0)
+                return
+
+            // console.log(list);
+         }
+            console.log("end of blue attack!!!");
+
+        //  end of blue attack
+
+        // begin of red attack
+
+         for(let i = 0 ; i<  platau.redGuerrierFighters.length ; i++){
+            platau.blueGuerrierFighters[0].getDamage(platau.redGuerrierFighters[0].attack())
+            //    }
+            if(platau.blueGuerrierFighters[0].isKilled())
+                platau.blueGuerrierFighters.shift()
+            
+            var firstItem = platau.redGuerrierFighters.shift();
+            platau.redGuerrierFighters.push(firstItem);
+
+            if(platau.blueGuerrierFighters.length===0)
+                return
+            // console.log(list);
+         }
+         console.log("end of red aataack!!")
+    }
 })
 
 
