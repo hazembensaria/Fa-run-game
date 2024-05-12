@@ -20,14 +20,51 @@ export default class Plate{
             img.style.width = width
             img.style.height = height
             img.style.zIndex = "999"
-            // img.style.position = "absolute"
+            img.style.position = "relative"
             img.style.backgroundImage = `url(${fightersList[i].image})`
             img.style.backgroundSize = "100% 100%"
             // img.style.transform = "scale(0)"
             img.classList.add("popUp")
 
+            var healthBar = document.createElement('div');
+            var actuelHealth = document.createElement('div');
+
+            healthBar.style.position = "absolute"
+            healthBar.style.top = "-1rem"
+            healthBar.style.width = "40px"
+            healthBar.style.height = "10px"
+            healthBar.style.backgroundColor = "white"
+            healthBar.style.border = "1px white solid"
+            healthBar.style.borderRadius = "3px"
+
+            healthBar.appendChild(actuelHealth)
+            actuelHealth.style.backgroundColor = "green"
+            actuelHealth.style.transform = "all 5s easy-in"
+
+            actuelHealth.style.width = "100%"
+            actuelHealth.style.height = "100%"
+            actuelHealth.style.borderRadius = "3px"
+
+            img.appendChild(healthBar)
         this.uiPlate.firstChild.appendChild(img)
         }
+    }
+    updateHealthBar(health , attackingTeam){
+        var current = (health*40)/100
+        attackingTeam === "blue"? 
+        (this.uiPlate.firstChild.children[this.blueGuerrierFighters.length].firstChild.firstChild.style.width = `${current}px` 
+        , console.log(...this.uiPlate.firstChild.children , this.blueGuerrierFighters.length)):
+        (this.uiPlate.firstChild.children[this.blueGuerrierFighters.length-1].firstChild.firstChild.style.width = `${current}px`
+            ,console.log(...this.uiPlate.firstChild.children , this.redGuerrierFighters.length)
+        )
+        console.log("health updated")
+
+    }
+    eraiseKilledFighter(attackingTeam){
+        attackingTeam === "blue"? 
+        this.uiPlate.firstChild.removeChild(this.uiPlate.firstChild.children[this.blueGuerrierFighters.length]):
+        this.uiPlate.firstChild.removeChild(this.uiPlate.firstChild.children[this.blueGuerrierFighters.length-1])
+        
     }
     eraiseFighters(){
         while (this.uiPlate.firstChild) {
@@ -35,7 +72,5 @@ export default class Plate{
         }
         this.uiPlate.style.filter = ``
         this.uiPlate.style.zIndex = '98'
-
-        
     }
 }

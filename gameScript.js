@@ -217,50 +217,90 @@ function moveRed(callBack){
 function startSequence(callBack){
     setTimeout(function(){moveBlue(callBack)} , 100)
 }
-async function startFight(){
 
-startSequence(()=>{
-    console.log('i am completeed!!!!!!!!!')
+
+
+
+function blueTeamAttack(callBack){
+    console.log( 'blue start attack')
+
     var platau = road.plateList[road.bluePosition]
-    console.log(road.plateList[road.bluePosition].blueGuerrierFighters.length)
-    // console.log(road.plateList[road.redPosition].redGuerrierFighters)
-    while(platau.blueGuerrierFighters.length!==0 || platau.redGuerrierFighters.length!==0){
        for(let i = 0 ; i<  platau.blueGuerrierFighters.length ; i++){
             platau.redGuerrierFighters[0].getDamage(platau.blueGuerrierFighters[0].attack())
-            //    }
+            platau.updateHealthBar(platau.redGuerrierFighters[0].vie , "blue")
             if(platau.redGuerrierFighters[0].isKilled())
+               { 
+                platau.eraiseKilledFighter("blue")
                 platau.redGuerrierFighters.shift()
-          
+            }
+            console.log(platau.blueGuerrierFighters  , 'blue after shift')
             var firstItem = platau.blueGuerrierFighters.shift();
-
             platau.blueGuerrierFighters.push(firstItem);
+            console.log(platau.blueGuerrierFighters , "after blue shift")
+            console.log(platau.redGuerrierFighters)
 
             if(platau.redGuerrierFighters.length===0)
-                return
-
-            // console.log(list);
+                break;
          }
             console.log("end of blue attack!!!");
 
-        //  end of blue attack
+         setTimeout(function(){
+            if(platau.redGuerrierFighters.length===0){
+                callBack()
+            }else{
+                redTeamAttack(callBack) 
+            }
+         },3000)
 
-        // begin of red attack
+}
+function redTeamAttack(callBack){
+    console.log( 'red start attack')
 
-         for(let i = 0 ; i<  platau.redGuerrierFighters.length ; i++){
-            platau.blueGuerrierFighters[0].getDamage(platau.redGuerrierFighters[0].attack())
-            //    }
-            if(platau.blueGuerrierFighters[0].isKilled())
-                platau.blueGuerrierFighters.shift()
-            
-            var firstItem = platau.redGuerrierFighters.shift();
-            platau.redGuerrierFighters.push(firstItem);
+    var platau = road.plateList[road.bluePosition]
+    for(let i = 0 ; i<  platau.redGuerrierFighters.length ; i++){
+        platau.blueGuerrierFighters[platau.blueGuerrierFighters.length-1].getDamage(platau.redGuerrierFighters[0].attack())
+        platau.updateHealthBar(platau.blueGuerrierFighters[platau.blueGuerrierFighters.length-1].vie ,"red")
+        if(platau.blueGuerrierFighters[platau.blueGuerrierFighters.length-1].isKilled()){
+            platau.eraiseKilledFighter("red")
+            platau.blueGuerrierFighters.pop()
 
-            if(platau.blueGuerrierFighters.length===0)
-                return
-            // console.log(list);
-         }
-         console.log("end of red aataack!!")
-    }
+        }
+        
+        var firstItem = platau.redGuerrierFighters.shift();
+        platau.redGuerrierFighters.push(firstItem);
+        console.log(platau.blueGuerrierFighters)
+        console.log(platau.redGuerrierFighters)
+        if(platau.blueGuerrierFighters.length===0)
+            break;
+        // console.log(list);
+     }
+     console.log("end of red aataack!!")
+
+         setTimeout(function(){
+            if(platau.blueGuerrierFighters.length===0){
+                callBack()
+            }else{
+                blueTeamAttack(callBack) 
+            }
+         },3000)
+
+}
+
+function attacking(callBack){
+    setTimeout(function(){
+        blueTeamAttack(callBack)
+    },3000)
+}
+
+
+async function startFight(){
+
+startSequence(()=>{
+    console.log('moving completed!!!!!!!!!')
+    attacking(()=>{
+    console.log('round complted!!!!!!!!!')
+
+    })
 })
 
 

@@ -22,7 +22,10 @@ export default class Nain{
     }
 
     getDamage(damage){
+        if(this.vie > damage/2)
         this.vie -= damage/2
+    else
+    this.vie = 0
         console.log(this.vie)
     }
     isKilled(){

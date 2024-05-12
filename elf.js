@@ -21,7 +21,10 @@ export default class Elf{
         return damage ;
     }
     getDamage(damage){
+        if(this.vie>damage)
         this.vie -= damage
+    else
+        this.vie = 0
         console.log(this.vie)
     }
     isKilled(){

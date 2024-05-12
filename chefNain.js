@@ -22,7 +22,10 @@ export default class ChefNain{
         return damage ;
     }
     getDamage(damage){
+        if(this.vie>damage/4 )
         this.vie -= damage/4
+    else
+    this.vie =0
         console.log(this.vie)
 
     }
