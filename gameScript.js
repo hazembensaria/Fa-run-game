@@ -196,19 +196,27 @@ function moveBlue(callBack){
 }
 function moveRed(callBack){
     // console.log(road.plateList[road.redPosition].redGuerrierFighters)
+    console.log("beggin of walking")
     for(let i = 0 ; i< road.redPosition.length ; i++ ){
+        console.log('this is loop')
     road.plateList[road.redPosition[i]].redGuerrierFighters = []
     road.plateList[road.redPosition[i]].eraiseFighters()
     road.redPosition[i]-- ;
+    console.log('this is eriasing end')
+
     // console.log(road.redPosition)
     road.plateList[road.redPosition[i]].uiPlate.firstChild.style.justifyContent= "end"
     road.plateList[road.redPosition[i]].redGuerrierFighters = redCastle.chosenGuerrier[i]
+    console.log('this is eriasing end')
+    
     road.plateList[road.redPosition[i]].drowFighters(road.plateList[road.redPosition[i]].redGuerrierFighters, "red" , "50px" , "70px" , "-45%", "30%")
+    console.log('this i am here npw !!!!!')
     var bb = document.getElementsByClassName('chosenGuerrierred')
-    for(let j =0 ; j< bb.length ; i++){
+    for(let j =0 ; j< bb.length ; j++){
         bb[j].style.transform= "scale(0)"
     }
 }
+console.log("end of walking")
     setTimeout(function() {
         if (road.bluePosition[0]!== road.redPosition[0]) {
             moveBlue(callBack);
@@ -338,20 +346,25 @@ function teamIsReady(castle , castleInfoUi ){
     var redLen = road.redPosition.length-1
     console.log(castle.tmpChosenGuerrierList.length)
    
-
+/** 
+ * chosen = 0 et tmp =0  => you cant
+ * chosen = 0 et tmp != 0 => normal
+ * chosen != 0 et tmp = 0 => not the best
+ * chosen != 1 et tmp != 0 => normal 
+ */
         if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="blue")
             {
                 console.log('hope you win blue')
                 road.bluePosition.pop()
                 
             }
-            // if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="red")
-            //     {
-            //         console.log('hope you win red')
-            //         road.redPosition.pop()
+            else if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="red")
+                {
+                    console.log('hope you win red')
+                    road.redPosition.pop()
                     
-            //     }
-    if(castle.tmpChosenGuerrierList.length!==0){
+                }
+            else if(castle.tmpChosenGuerrierList.length!==0 ){
     if(castle.name==="blue"){
         castle.confirmGuerrier()
         road.plateList[road.bluePosition[blueLen]].blueGuerrierFighters = blueCastle.chosenGuerrier[blueCastle.chosenGuerrier.length-1]
@@ -386,7 +399,7 @@ function teamIsReady(castle , castleInfoUi ){
 } 
    
    
-    if(castle.chosenGuerrier.length===0)
+    else if(castle.chosenGuerrier.length===0 && castle.tmpChosenGuerrierList.length===0)
         {
             console.log('you dont have any guerrier in field!')
             return;
