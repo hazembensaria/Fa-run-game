@@ -11,5 +11,23 @@ import Nain from "./nain.js";
         this.winingRounds = 0
         this.availableGuerrier = [new Elf(guerrirUi[0]) , new Nain(guerrirUi[1]) ,new ChefNain(guerrirUi[2]) ,new ChefElf(guerrirUi[3])];
         this.chosenGuerrier = []
+        this.tmpChosenGuerrierList = []
+    }
+
+    clearChisenGeurrier() {
+        this.chosenGuerrier= []
+    }
+
+    clameRewards(){
+        this.resource +=1
+        
+    }
+
+    winRound(){
+        this.winingRounds+=1
+    }
+    confirmGuerrier(){
+        this.chosenGuerrier.push(this.tmpChosenGuerrierList)
+        this.tmpChosenGuerrierList =[]
     }
 }

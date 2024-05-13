@@ -16,6 +16,7 @@ export default class Plate{
         this.uiPlate.firstChild.style.top = top
         this.uiPlate.firstChild.style.left = left
         for(let i =0 ; i< fightersList.length ; i++){
+            var health  = (fightersList[i].vie*40)/100
             var img = document.createElement('div');
             // this.uiPlate.firstChild.style.border = "1px black solid"
             img.style.width = width
@@ -42,7 +43,7 @@ export default class Plate{
             actuelHealth.style.backgroundColor = "green"
             actuelHealth.style.transform = "all 5s easy-in"
 
-            actuelHealth.style.width = "100%"
+            actuelHealth.style.width = `${health}px`
             actuelHealth.style.height = "100%"
             actuelHealth.style.borderRadius = "3px"
 
@@ -68,8 +69,8 @@ export default class Plate{
         
     }
     eraiseFighters(){
-        while (this.uiPlate.firstChild) {
-            this.uiPlate.removeChild(this.uiPlate.firstChild);
+        while (this.uiPlate.firstChild.firstChild) {
+            this.uiPlate.firstChild.removeChild(this.uiPlate.firstChild.firstChild);
         }
         this.uiPlate.style.filter = ``
         this.uiPlate.style.zIndex = '98'
