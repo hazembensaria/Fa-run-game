@@ -69,63 +69,6 @@ function loadUi(){
     blueCastleInfo.appendChild(blueInfoDiv)
     redCastleInfo.appendChild(redTextDiv)
 }
-function createDiv(text , element){ 
-    const node = document.createTextNode(text);
-var div = document.createElement('div');
-div.appendChild(node)
-// div.style.backgroundColor = "red"
-element.appendChild(div);
-return div
-}
-
-function createImg(src , element , canTrain){
-var img = document.createElement('img');
-img.src = src
-canTrain ? img.classList.add("guerrierIconValid") : img.classList.add("guerrierIconInvalid")
-img.alt = 'image'
-
-element.appendChild(img);
-}
-
-function UpdateGuerrierIuicons(castle , className , id){
-    const bg = document.getElementsByClassName(className)
-    for(let i = 0 ; i<bg.length ; i++){
-        // console.log(bg[i])c
-        var img = bg[i].children[0]
-        let cost = parseInt(bg[i].children[2].textContent[0])
-        if(castle.resource < cost){
-           img.classList.remove('guerrierIconValid')
-           img.classList.add('guerrierIconInvalid')
-       }else{
-        img.classList.add('guerrierIconValid')
-        img.classList.remove('guerrierIconInvalid')
-       }
-    }
- const text = document.getElementById(id)
- text.textContent = `resorces: ${castle.resource} wining rounds : ${castle.winingRounds}`
-}
-function showGuerrier(castle , info , className ){
-    castle.availableGuerrier.map(guerrier =>{
-        var div1 = document.createElement('div');
-        div1.classList.add(className)
-        div1.style.display = "flex"
-        div1.style.alignItems = "center"
-        div1.style.flexDirection = "column"
-        div1.style.gap = ".5rem"
-        div1.style.height = "60px"
-        div1.style.width = "100%"
-        createImg(guerrier.image , div1 , castle.resource >= guerrier.resource)
-        createDiv(guerrier.name , div1)
-        createDiv(`${guerrier.resource} coins` , div1)
-
-        info.appendChild(div1)
-
-        // redGuerrirList = document.createElement('div');
-        // redCastleInfo.appendChild(redGuerrirList)
-
-    })
-}
-
 
 function bleuCastleHover(){
     const audio = new Audio("sounds/hover.mp3")
@@ -415,17 +358,15 @@ function teamIsReady(castle , castleInfoUi ){
  
 
 }
-function clearUiChisenGeurrier(listUi){
-    while (listUi.firstChild) {
-        this.uiPlate.removeChild(listUi.firstChild);
-    }
-}
+
 function showFullInfo(){
     if(blueCastleInfo.classList.contains("shrinkInfoBlue")){
       buildUi.shrinkCastleInfo(blueCastleInfo)
     }
     else{
     buildUi.drowInfoInterface(blueGuerrierList , blueCastleInfo , blueCastle , "bleuGuerrier" , (list , button)=>{
+        blueGuerrierList = list
+        
         button.addEventListener("click" , function(){
             teamIsReady(blueCastle , blueCastleInfo)
             })
@@ -434,7 +375,7 @@ function showFullInfo(){
         for(let i =0 ; i< blueGuerrirList.length ; i++){
             blueGuerrirList[i].addEventListener("click" , function(){
                 chooseGuerrier(this , blueCastle , list)
-                UpdateGuerrierIuicons(blueCastle , "bleuGuerrier" , "blueText")
+                buildUi.UpdateGuerrierIuicons(blueCastle , "bleuGuerrier" , "blueText")
             })
         }
         console.log(blueCastle.chosenGuerrier)
@@ -443,73 +384,30 @@ function showFullInfo(){
 
     }
 }
+
+
 function showFullInfoRed(){
     if(redCastleInfo.classList.contains("shrinkInfoRed")){
-        redCastleInfo.classList.remove("shrinkInfoRed")
-        redCastleInfo.classList.add("strechInfoRed")
-
+        buildUi.shrinkCastleInfo(redCastleInfo)
     }
     else{
-    var guerrierInfo = document.createElement('div');
-    guerrierInfo.style.width ="100%"
-    guerrierInfo.style.height ="60%"
-    guerrierInfo.style.display ="flex"
-    guerrierInfo.style.alignItems = "start"
-    guerrierInfo.style.paddingTop = "1rem"
-    guerrierInfo.style.borderBottom = "lightgray 1px solid"
-    guerrierInfo.style.gap = "space-event"
-    guerrierInfo.style.justifyContent = "center"
-    guerrierInfo.style.overflow = "hidden"
-
-
-    redCastleInfo.appendChild(guerrierInfo)
-// -----------------------------------------------------
-    redGuerrierList = document.createElement('div');
-    redGuerrierList.style.width= "100%"
-    redGuerrierList.style.height= "20%"
-    redGuerrierList.style.display ="flex"
-    redGuerrierList.style.overflow ="hidden"
-    redGuerrierList.style.display ="relative"
-
-
-
-    var playButton1 = document.createElement('div');
-    playButton1.style.width= "18%"
-    playButton1.style.height= "10%"
-    playButton1.style.alignSelf= "center"
-    playButton1.style.position= "absolute"
-    playButton1.style.left= "80%"
-    playButton1.style.backgroundColor= "red"
-    playButton1.style.borderRadius= "5px"    
-    playButton1.style.textAlign= "center"
-    playButton1.style.color= "white"
-    playButton1.addEventListener("click" , function(){
-        teamIsReady(redCastle , redCastleInfo)
-    })
-
-    playButton1.textContent ="go fight"
-    redGuerrierList.appendChild(playButton1)
-    redGuerrierList.style.alignItems = "start"
-
-    redCastleInfo.appendChild(redGuerrierList)
-
-
-    // ----------------------
-   showGuerrier(redCastle , guerrierInfo , "redGuerrier")
-    redCastleInfo.classList.add("strechInfoRed")
-
-    var redGuerrirList = document.getElementsByClassName("redGuerrier")
-    for(let i =0 ; i< redGuerrirList.length ; i++){
-        redGuerrirList[i].addEventListener("click" , function(){
-            chooseGuerrier(this , redCastle ,redGuerrierList)
-            UpdateGuerrierIuicons(redCastle , "redGuerrier" , "redText")
-        }
-            
-            
-        )
+        buildUi.drowInfoInterface(redGuerrierList , redCastleInfo , redCastle , "redGuerrier" , (list , button)=>{
+            redGuerrierList = list
+            button.addEventListener("click" , function(){
+                teamIsReady(redCastle , redCastleInfo)
+                }) 
+                var redGuerrirList = document.getElementsByClassName("redGuerrier")
+             for(let i =0 ; i< redGuerrirList.length ; i++){
+                redGuerrirList[i].addEventListener("click" , function(){
+            chooseGuerrier(this , redCastle ,list)
+            buildUi.UpdateGuerrierIuicons(redCastle , "redGuerrier" , "redText")
+        })
     }
+     redCastleInfo.classList.add("strechInfoRed")
 
-}
+
+        } )
+    }
 }
 img.addEventListener("mouseover" , bleuCastleHover)
 img.addEventListener("click" , showFullInfo)
@@ -525,13 +423,13 @@ function removeGuerrier(element , castle){
     blueGuerrierList.removeChild(element)
     blueCastle.tmpChosenGuerrierList.splice(element.getAttribute("number") ,1)
     blueCastle.resource+= parseInt(element.getAttribute("cost"))
-    UpdateGuerrierIuicons(blueCastle , "bleuGuerrier" , "blueText")
+    buildUi.UpdateGuerrierIuicons(blueCastle , "bleuGuerrier" , "blueText")
  }
  else{
     redGuerrierList.removeChild(element)
     redCastle.tmpChosenGuerrierList.splice(element.getAttribute("number") ,1)
     redCastle.resource+= parseInt(element.getAttribute("cost"))
-    UpdateGuerrierIuicons(redCastle , "redGuerrier" , "redText")
+    buildUi.UpdateGuerrierIuicons(redCastle , "redGuerrier" , "redText")
  }
 
 

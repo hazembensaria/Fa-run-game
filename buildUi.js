@@ -107,5 +107,26 @@ export default class BuildUi{
     
         })
     }
+
+
+
+
+     UpdateGuerrierIuicons(castle , className , id){
+        const bg = document.getElementsByClassName(className)
+        for(let i = 0 ; i<bg.length ; i++){
+            // console.log(bg[i])c
+            var img = bg[i].children[0]
+            let cost = parseInt(bg[i].children[2].textContent[0])
+            if(castle.resource < cost){
+               img.classList.remove('guerrierIconValid')
+               img.classList.add('guerrierIconInvalid')
+           }else{
+            img.classList.add('guerrierIconValid')
+            img.classList.remove('guerrierIconInvalid')
+           }
+        }
+     const text = document.getElementById(id)
+     text.textContent = `resorces: ${castle.resource} wining rounds : ${castle.winingRounds}`
+    }
      
 }
