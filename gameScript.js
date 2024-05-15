@@ -88,168 +88,42 @@ function chooseGuerrier(guerrier , castle , uiList){
             audio = new Audio("sounds/elfVoice.mp3")
             audio.play();
             castle.tmpChosenGuerrierList.push(new Elf(image))
-            attachGuerrirToUilist(castle ,uiList)
+            attachGuerrirToUilistAndUppdateCastleState(castle ,uiList)
         break;
         case name==="nain" && castle.resource>=1 : 
             audio = new Audio("sounds/nainVoice.mp3")
             audio.play();
             castle.tmpChosenGuerrierList.push(new Nain(image))
-            attachGuerrirToUilist(castle , uiList)
+            attachGuerrirToUilistAndUppdateCastleState(castle , uiList)
 
         break;
         case name==="chefNain" && castle.resource>=3 :
             audio = new Audio("sounds/chefNainVoice.mp3")
             audio.play();
             castle.tmpChosenGuerrierList.push(new ChefNain(image))
-            attachGuerrirToUilist(castle , uiList)
+            attachGuerrirToUilistAndUppdateCastleState(castle , uiList)
         break;
         case name=== "chefElf" && castle.resource>=4 :
             audio = new Audio("sounds/chefElfVoice.mp3")
             audio.play();
             castle.tmpChosenGuerrierList.push(new ChefElf(image))
-            attachGuerrirToUilist(castle ,uiList)
+            attachGuerrirToUilistAndUppdateCastleState(castle ,uiList)
         break;
         default :console.log('jqdsfklajs')
     }
 
     console.log(blueCastle.chosenGuerrier)
 }
-function moveBlue(callBack){
-    for(let i = 0 ; i< road.bluePosition.length ; i++ ){
-        // console.log(road.plateList[road.bluePosition].blueGuerrierFighters)
-        road.plateList[road.bluePosition[i]].blueGuerrierFighters = []
-        road.plateList[road.bluePosition[i]].eraiseFighters()
-        road.bluePosition[i]++ ;
-        console.log(road.bluePosition)
 
-        road.plateList[road.bluePosition[i]].uiPlate.firstChild.style.justifyContent= "end"
-        road.plateList[road.bluePosition[i]].blueGuerrierFighters = blueCastle.chosenGuerrier[i]
-        road.plateList[road.bluePosition[i]].drowFighters(road.plateList[road.bluePosition[i]].blueGuerrierFighters , "blue" , "60px" , "80px" ,"45%" ,"-30%")
-        var bb = document.getElementsByClassName('chosenGuerrierblue')
-        for(let j =0 ; j< bb.length ; j++){
-            bb[j].style.transform= "scale(0)"   
-        }
-    }
-    
-    setTimeout(function() {
-        if (road.bluePosition[0]!== road.redPosition[0]) {
-            moveRed(callBack);
-        }
-        else
-        callBack()
-    }, 1000);
-}
-function moveRed(callBack){
-    // console.log(road.plateList[road.redPosition].redGuerrierFighters)
-    console.log("beggin of walking")
-    for(let i = 0 ; i< road.redPosition.length ; i++ ){
-        console.log('this is loop')
-    road.plateList[road.redPosition[i]].redGuerrierFighters = []
-    road.plateList[road.redPosition[i]].eraiseFighters()
-    road.redPosition[i]-- ;
-    console.log('this is eriasing end')
-
-    // console.log(road.redPosition)
-    road.plateList[road.redPosition[i]].uiPlate.firstChild.style.justifyContent= "end"
-    road.plateList[road.redPosition[i]].redGuerrierFighters = redCastle.chosenGuerrier[i]
-    console.log('this is eriasing end')
-    
-    road.plateList[road.redPosition[i]].drowFighters(road.plateList[road.redPosition[i]].redGuerrierFighters, "red" , "50px" , "70px" , "-45%", "30%")
-    console.log('this i am here npw !!!!!')
-    var bb = document.getElementsByClassName('chosenGuerrierred')
-    for(let j =0 ; j< bb.length ; j++){
-        bb[j].style.transform= "scale(0)"
-    }
-}
-console.log("end of walking")
-    setTimeout(function() {
-        if (road.bluePosition[0]!== road.redPosition[0]) {
-            moveBlue(callBack);
-        }
-        else
-        callBack()
-    }, 1000);
-}
 
 function startSequence(callBack){
-    setTimeout(function(){moveBlue(callBack)} , 1000)
+    setTimeout(function(){road.moveBlue(blueCastle , callBack , redCastle)} , 1000)
 }
 
-
-
-
-function blueTeamAttack(callBack){
-    console.log( 'blue start attack')
-
-    var platau = road.plateList[road.bluePosition[0]]
-       for(let i = 0 ; i<  platau.blueGuerrierFighters.length ; i++){
-            platau.redGuerrierFighters[0].getDamage(platau.blueGuerrierFighters[0].attack())
-            platau.updateHealthBar(platau.redGuerrierFighters[0].vie , "blue")
-            if(platau.redGuerrierFighters[0].isKilled())
-               { 
-                platau.eraiseKilledFighter("blue")
-                platau.redGuerrierFighters.shift()
-            }
-            console.log(platau.blueGuerrierFighters  , 'blue after shift')
-            var firstItem = platau.blueGuerrierFighters.shift();
-            platau.blueGuerrierFighters.push(firstItem);
-            console.log(platau.blueGuerrierFighters , "after blue shift")
-            console.log(platau.redGuerrierFighters)
-
-            if(platau.redGuerrierFighters.length===0){
-                blueCastle.winRound()
-                break;
-
-            }
-         }
-            console.log("end of blue attack!!!");
-
-         setTimeout(function(){
-            if(platau.redGuerrierFighters.length===0){
-                callBack()
-            }else{
-                redTeamAttack(callBack) 
-            }
-         },3000)
-
-}
-function redTeamAttack(callBack){
-    console.log( 'red start attack')
-
-    var platau = road.plateList[road.bluePosition[0]]
-    for(let i = 0 ; i<  platau.redGuerrierFighters.length ; i++){
-        platau.blueGuerrierFighters[platau.blueGuerrierFighters.length-1].getDamage(platau.redGuerrierFighters[0].attack())
-        platau.updateHealthBar(platau.blueGuerrierFighters[platau.blueGuerrierFighters.length-1].vie ,"red")
-        if(platau.blueGuerrierFighters[platau.blueGuerrierFighters.length-1].isKilled()){
-            platau.eraiseKilledFighter("red")
-            platau.blueGuerrierFighters.pop()
-
-        }
-        
-        var firstItem = platau.redGuerrierFighters.shift();
-        platau.redGuerrierFighters.push(firstItem);
-        console.log(platau.blueGuerrierFighters)
-        console.log(platau.redGuerrierFighters)
-        if(platau.blueGuerrierFighters.length===0)
-            {   redCastle.winRound()
-                break;}
-        // console.log(list);
-     }
-     console.log("end of red aataack!!")
-
-         setTimeout(function(){
-            if(platau.blueGuerrierFighters.length===0){
-                callBack()
-            }else{
-                blueTeamAttack(callBack) 
-            }
-         },3000)
-
-}
 
 function attacking(callBack){
     setTimeout(function(){
-        blueTeamAttack(callBack)
+        road.blueTeamAttack(blueCastle , callBack , redCastle)
     },3000)
 }
 
@@ -361,7 +235,7 @@ function teamIsReady(castle , castleInfoUi ){
 
 function showFullInfo(){
     if(blueCastleInfo.classList.contains("shrinkInfoBlue")){
-      buildUi.shrinkCastleInfo(blueCastleInfo)
+      buildUi.shrinkCastleInfo(blueCastle , blueCastleInfo)
     }
     else{
     buildUi.drowInfoInterface(blueGuerrierList , blueCastleInfo , blueCastle , "bleuGuerrier" , (list , button)=>{
@@ -388,7 +262,7 @@ function showFullInfo(){
 
 function showFullInfoRed(){
     if(redCastleInfo.classList.contains("shrinkInfoRed")){
-        buildUi.shrinkCastleInfo(redCastleInfo)
+        buildUi.shrinkCastleInfo(redCastle , redCastleInfo)
     }
     else{
         buildUi.drowInfoInterface(redGuerrierList , redCastleInfo , redCastle , "redGuerrier" , (list , button)=>{
@@ -422,7 +296,7 @@ function removeGuerrier(element , castle){
  if(castle.name ==="blue"){
     blueGuerrierList.removeChild(element)
     blueCastle.tmpChosenGuerrierList.splice(element.getAttribute("number") ,1)
-    blueCastle.resource+= parseInt(element.getAttribute("cost"))
+    castle.incrimentResources(parseInt(element.getAttribute("cost")))
     buildUi.UpdateGuerrierIuicons(blueCastle , "bleuGuerrier" , "blueText")
  }
  else{
@@ -434,23 +308,13 @@ function removeGuerrier(element , castle){
 
 
 }
-function attachGuerrirToUilist(castle ,list){
-// blueCastle.chosenGuerrier.forEach(e=>{
-//     console.log(e)
-    var img2 = document.createElement('img')
-    var len = castle.tmpChosenGuerrierList.length-1
-    castle.resource -= castle.tmpChosenGuerrierList[len].resource
-    img2.src=castle.tmpChosenGuerrierList[len].image
-    img2.style.width= "50px"
-    img2.style.height= "65px"
-    img2.classList.add(`chosenGuerrier${castle.name}`)
-    img2.setAttribute("number" ,len)
-    img2.setAttribute("cost" ,castle.tmpChosenGuerrierList[len].resource)
-    console.log(list)
-    list.appendChild(img2)
-    img2.addEventListener("click" , function(){
-       removeGuerrier(this , castle)
+function attachGuerrirToUilistAndUppdateCastleState(castle ,list){
+    castle.decrimentResources()
+    buildUi.attachGuerrirToUilist(castle , list , (img)=>{
+        img.addEventListener("click" , function(){
+            removeGuerrier(this , castle)
+         })
     })
-// })
+
 }
 document.addEventListener("DOMContentLoaded"  , loadUi);

@@ -2,9 +2,13 @@ export default class BuildUi{
 
 
 
-    shrinkCastleInfo(castleInfo){
-        castleInfo.classList.remove("shrinkInfoBlue")
-        castleInfo.classList.add("strechInfoBlue")
+    shrinkCastleInfo(castle , castleInfo){
+        if(castle.name==="blue")
+        {castleInfo.classList.remove("shrinkInfoBlue")
+        castleInfo.classList.add("strechInfoBlue")}
+        else
+         {castleInfo.classList.remove("shrinkInfoRed")
+        castleInfo.classList.add("strechInfoRed")}
     }
 
     /**
@@ -129,4 +133,23 @@ export default class BuildUi{
      text.textContent = `resorces: ${castle.resource} wining rounds : ${castle.winingRounds}`
     }
      
+
+
+     attachGuerrirToUilist(castle ,list , callBack){
+            var img2 = document.createElement('img')
+            var len = castle.tmpChosenGuerrierList.length-1
+            img2.src=castle.tmpChosenGuerrierList[len].image
+            img2.style.width= "50px"
+            img2.style.height= "65px"
+            img2.classList.add(`chosenGuerrier${castle.name}`)
+            img2.setAttribute("number" ,len)
+            img2.setAttribute("cost" ,castle.tmpChosenGuerrierList[len].resource)
+            console.log(list)
+            list.appendChild(img2)
+            img2.addEventListener("click" , function(){
+               removeGuerrier(this , castle)
+            })
+            callBack(img2)
+        // })
+        }
 }

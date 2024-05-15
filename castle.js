@@ -30,4 +30,11 @@ import Nain from "./nain.js";
         this.chosenGuerrier.push(this.tmpChosenGuerrierList)
         this.tmpChosenGuerrierList =[]
     }
+
+    decrimentResources(){
+        this.resource -= this.tmpChosenGuerrierList[this.tmpChosenGuerrierList.length-1].resource
+    }
+    incrimentResources(resorces){
+        this.resource+= resorces
+    }
 }
