@@ -1,3 +1,4 @@
+
 export default class BuildUi{
 
 
@@ -152,4 +153,50 @@ export default class BuildUi{
             callBack(img2)
         // })
         }
+
+
+        buildInfoSection(blueCastle , redCastle , blueCastleInfo , redCastleInfo , container ,  callBack){
+            var img = document.createElement('img');
+            var img1 = document.createElement('img');
+            img.src = blueCastle.image
+            img.alt = 'image'; 
+            img1.src = redCastle.image
+            img1.alt = 'image'; 
+            container.appendChild(img);
+            
+            container.appendChild(img1);
+            img.classList.add("blueCastle");
+            img1.classList.add("redCastle");
+         
+            const blutext = document.createTextNode(`resorces: ${blueCastle.resource} `)
+            const blutext1 = document.createTextNode(`wining rounds: ${blueCastle.winingRounds} `)
+            const redtext = document.createTextNode(`resorces: ${redCastle.resource} `)
+            const redtext1 = document.createTextNode(`wining rounds: ${redCastle.winingRounds} `)
+            const blutextDiv = document.createElement('div')
+            const redTextDiv = document.createElement('div')
+            const blueInfoDiv = document.createElement('div')
+            const redInfoDiv = document.createElement('div')
+            blutextDiv.id = "blueText"
+            redTextDiv.id = "redText"
+            redTextDiv.style.display = "flex"
+            redTextDiv.style.justifyContent = "center"
+            redTextDiv.style.width = "400px"
+            blutextDiv.style.display = "flex"
+            blutextDiv.style.justifyContent = "center"
+            blutextDiv.style.width = "400px"
+         
+            blutextDiv.appendChild(blutext)
+            blutextDiv.appendChild(blutext1)
+            redTextDiv.appendChild(redtext)
+            redTextDiv.appendChild(redtext1)
+            blueInfoDiv.append(blutextDiv)
+            redInfoDiv.append(redTextDiv)
+         
+         
+             blueCastleInfo.appendChild(blueInfoDiv)
+             redCastleInfo.appendChild(redTextDiv)
+             callBack(img , img1)
+           
+        }
+
 }

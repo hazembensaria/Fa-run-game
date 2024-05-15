@@ -7,8 +7,7 @@ import Nain from './nain.js';
 import Road from './road.js';
 import Stone from './stone.js'; 
 const Container = document.getElementById('container'); 
-var img = document.createElement('img');
-var img1 = document.createElement('img');
+
 var blueCastleInfo = document.getElementById('blueCastleInfo')
 var redCastleInfo = document.getElementById('redCastleInfo')
 var blueCastle = new Castle("images/bleucastle2.png",
@@ -31,43 +30,15 @@ function loadUi(){
     road.plateList[i].setUiPlate(document.getElementById(`test${i}`))
    }
    console.log(blueCastle , redCastle)
-   img.src = blueCastle.image
-   img.alt = 'image'; 
-   img1.src = redCastle.image
-   img1.alt = 'image'; 
-   Container.appendChild(img);
-   
-   Container.appendChild(img1);
-   img.classList.add("blueCastle");
-   img1.classList.add("redCastle");
-
-   const blutext = document.createTextNode(`resorces: ${blueCastle.resource} `)
-   const blutext1 = document.createTextNode(`wining rounds: ${blueCastle.winingRounds} `)
-   const redtext = document.createTextNode(`resorces: ${redCastle.resource} `)
-   const redtext1 = document.createTextNode(`wining rounds: ${redCastle.winingRounds} `)
-   const blutextDiv = document.createElement('div')
-   const redTextDiv = document.createElement('div')
-   const blueInfoDiv = document.createElement('div')
-   const redInfoDiv = document.createElement('div')
-   blutextDiv.id = "blueText"
-   redTextDiv.id = "redText"
-   redTextDiv.style.display = "flex"
-   redTextDiv.style.justifyContent = "center"
-   redTextDiv.style.width = "400px"
-   blutextDiv.style.display = "flex"
-   blutextDiv.style.justifyContent = "center"
-   blutextDiv.style.width = "400px"
-
-   blutextDiv.appendChild(blutext)
-   blutextDiv.appendChild(blutext1)
-   redTextDiv.appendChild(redtext)
-   redTextDiv.appendChild(redtext1)
-   blueInfoDiv.append(blutextDiv)
-   redInfoDiv.append(redTextDiv)
+   buildUi.buildInfoSection(blueCastle , redCastle , blueCastleInfo , redCastleInfo , Container ,  (img , img1)=>{
+    img.addEventListener("mouseover" , bleuCastleHover)
+    img.addEventListener("click" , showFullInfo)
+img1.addEventListener("click" , showFullInfoRed)
 
 
-    blueCastleInfo.appendChild(blueInfoDiv)
-    redCastleInfo.appendChild(redTextDiv)
+img1.addEventListener("mouseover" , redCastleHover)
+    console.log(img , img1)
+   })
 }
 
 function bleuCastleHover(){
@@ -260,7 +231,7 @@ function showFullInfo(){
 }
 
 
-function showFullInfoRed(){
+  function showFullInfoRed(){
     if(redCastleInfo.classList.contains("shrinkInfoRed")){
         buildUi.shrinkCastleInfo(redCastle , redCastleInfo)
     }
@@ -280,16 +251,10 @@ function showFullInfoRed(){
      redCastleInfo.classList.add("strechInfoRed")
 
 
-        } )
-    }
+    } )
 }
-img.addEventListener("mouseover" , bleuCastleHover)
-img.addEventListener("click" , showFullInfo)
-img1.addEventListener("click" , showFullInfoRed)
-
-
-img1.addEventListener("mouseover" , redCastleHover)
-
+}
+document.addEventListener("DOMContentLoaded"  , loadUi);
 
 function removeGuerrier(element , castle){
     console.log(castle)
@@ -317,4 +282,3 @@ function attachGuerrirToUilistAndUppdateCastleState(castle ,list){
     })
 
 }
-document.addEventListener("DOMContentLoaded"  , loadUi);
