@@ -1,35 +1,19 @@
-export default class ChefElf{
+import Guerrier from "./guerrier.js";
+
+export default class ChefElf extends Guerrier{
     constructor(image){
-        this.force = 40
-        this.vie = 100
-        this.name= "chefElf"
-        this.image = image
-        this.resource = 4
+   
+        super(40 , "chefElf" , image , 4)
 
     }
-    getRandomNumber() {
-        var randomNumber = Math.floor(Math.random() * 3);
-        return randomNumber + 1;
-    }
-
+  
     attack(){
-        var damage =0
-        for(let i  = 0  ; i<=this.force ; i++){
-            damage += this.getRandomNumber()
-        }
-        console.log(damage)
-    
-        return damage ;
-    }
-    getDamage(damage){
-        if(this.vie > damage)
-        this.vie -= damage
-    else
-    this.vie = 0
-        console.log(this.vie)
-
-    }
-    isKilled(){
-        return this.vie <=0
-    }
+        return super.attack()
+       }
+       getDamage(damage){
+       super.getDamage(damage)
+       }
+       isKilled(){
+       return super.isKilled() 
+       }
 }

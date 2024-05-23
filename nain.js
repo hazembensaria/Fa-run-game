@@ -1,34 +1,19 @@
-export default class Nain{
+import Guerrier from "./guerrier.js";
+
+export default class Nain extends Guerrier{
     constructor(image){
-        this.force = 10
-        this.vie= 100
-        this.name= "nain"
-        this.image = image
-        this.resource = 1
-    }
-    getRandomNumber() {
-        var randomNumber = Math.floor(Math.random() * 3);
-        return randomNumber + 1;
-    }
+        
+        super(10 , "nain" , image , 1)
 
+    }
+    
     attack(){
-        let damage =0
-        for(let i  = 0  ; i<=this.force ; i++){
-            damage += this.getRandomNumber()
-        }
-        console.log(damage)
-
-        return damage ;
-    }
-
-    getDamage(damage){
-        if(this.vie > damage/2)
-        this.vie -= damage/2
-    else
-    this.vie = 0
-        console.log(this.vie)
-    }
-    isKilled(){
-        return this.vie <=0
-    }
+        return super.attack()
+       }
+       getDamage(damage){
+       super.getDamage(damage/2)
+       }
+       isKilled(){
+       return super.isKilled() 
+       }
 }

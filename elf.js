@@ -1,33 +1,19 @@
-export default class Elf{
+import Guerrier from "./guerrier.js"
+
+export default class Elf extends Guerrier{
+    
     constructor(image){
-        this.force =20
-        this.vie = 100
-        this.name= "elf"
-        this.image = image
-        this.resource = 2
-    }
-    getRandomNumber() {
-        var randomNumber = Math.floor(Math.random() * 3);
-        return randomNumber + 1;
-    }
+        super(20 , "elf" , image , 2)
 
+    }
+   
     attack(){
-        var damage =0
-        for(let i  = 0  ; i<=this.force ; i++){
-            damage += this.getRandomNumber()
-        }
-        console.log(damage)
-
-        return damage ;
+     return super.attack()
     }
     getDamage(damage){
-        if(this.vie>damage)
-        this.vie -= damage
-    else
-        this.vie = 0
-        console.log(this.vie)
+    super.getDamage(damage)
     }
     isKilled(){
-        return this.vie <=0
+    return super.isKilled() 
     }
 }
