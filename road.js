@@ -51,7 +51,7 @@ moveRed(castle , callBack , secodeCastel){
     // console.log(road.redPosition)
     this.plateList[this.redPosition[i]].uiPlate.firstChild.style.justifyContent= "end"
     this.plateList[this.redPosition[i]].redGuerrierFighters = castle.chosenGuerrier[i]
-    console.log('this is eriasing end')
+    console.log('this is eriasing end') 
     
     this.plateList[this.redPosition[i]].drowFighters(this.plateList[this.redPosition[i]].redGuerrierFighters, "red" , "50px" , "70px" , "-45%", "30%")
     console.log('this i am here npw !!!!!')
@@ -65,27 +65,35 @@ console.log(this.bluePosition[0])
     setTimeout(()=> {
     console.log(this.bluePosition[0])
 
-        if (this.bluePosition[0]!== this.redPosition[0]) {
-            this.moveBlue( secodeCastel , callBack , castle);
+    if (this.bluePosition[0]=== this.redPosition[0] || this.redPosition[0] === 0) {
+        callBack()
+
         }
         else
-        callBack()
+        this.moveBlue( secodeCastel , callBack , castle);
+
     }, 1000);
 }
 
 
 
  moveBlue(castle  , callBack , secondeCastel){
+    if(this.plateList[this.bluePosition[0]+1].redGuerrierFighters.length !==0){
+       
+            this.moveRed(secondeCastel , callBack , castle);
+                console.log("finishhhhhhhhh from reddd !!!!")
+                return ;
+    }
     for(let i = 0 ; i< this.bluePosition.length ; i++ ){
         // console.log(road.plateList[road.bluePosition].blueGuerrierFighters)
         this.plateList[this.bluePosition[i]].blueGuerrierFighters = []
         this.plateList[this.bluePosition[i]].eraiseFighters()
         this.bluePosition[i]++ ;
         console.log(this.bluePosition)
-
+       
         this.plateList[this.bluePosition[i]].uiPlate.firstChild.style.justifyContent= "end"
         this.plateList[this.bluePosition[i]].blueGuerrierFighters = castle.chosenGuerrier[i]
-        this.plateList[this.bluePosition[i]].drowFighters(this.plateList[this.bluePosition[i]].blueGuerrierFighters , "blue" , "60px" , "80px" ,"45%" ,"-30%")
+        this.plateList[this.bluePosition[i]].drowFighters(this.plateList[this.bluePosition[i]].blueGuerrierFighters , "blue" , "60px" , "80px" ,"45%" ,"-30%" , this.bluePosition[0])
         var bb = document.getElementsByClassName('chosenGuerrierblue')
         for(let j =0 ; j< bb.length ; j++){
             bb[j].style.transform= "scale(0)"   

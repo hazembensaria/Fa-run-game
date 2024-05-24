@@ -156,7 +156,7 @@ function teamIsReady(castle , castleInfoUi ){
                 }
             else if(castle.tmpChosenGuerrierList.length!==0 ){
     if(castle.name==="blue"){
-        castle.confirmGuerrier()
+        castle.confirmGuerrier()    
         road.plateList[road.bluePosition[blueLen]].blueGuerrierFighters = blueCastle.chosenGuerrier[blueCastle.chosenGuerrier.length-1]
         road.plateList[road.bluePosition[blueLen]].drowFighters(road.plateList[road.bluePosition[blueLen]].blueGuerrierFighters, "blue" , "60px" , "80px" ,"45%" ,"-30%")
         road.plateList[road.bluePosition[blueLen]].uiPlate.firstChild.style.justifyContent= "end"
@@ -255,6 +255,13 @@ function showFullInfo(){
 }
 }
 document.addEventListener("DOMContentLoaded"  , loadUi);
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape" || event.key === 27) {
+      // Escape key pressed
+      console.log("Escape key pressed");
+      // Add your code to handle the escape key press here
+    }
+  });
 
 function removeGuerrier(element , castle){
     console.log(castle)

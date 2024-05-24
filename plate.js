@@ -10,7 +10,7 @@ export default class Plate{
     setUiPlate(uiPlate){
         this.uiPlate = uiPlate ;
     }
-    drowFighters(fightersList , color , width , height , top , left){
+    drowFighters(fightersList , color , width , height , top , left , teamPosition){
         this.uiPlate.style.filter = `drop-shadow(4px 7px 4px ${color})`
         this.uiPlate.style.zIndex = `999`
         this.uiPlate.firstChild.style.top = top
@@ -25,6 +25,7 @@ export default class Plate{
             img.style.position = "relative"
             img.style.backgroundImage = `url(${fightersList[i].image})`
             img.style.backgroundSize = "100% 100%"
+            color ==="red" ? img.style.order = `${i+1}` : img.style.order = "0"
             // img.style.transform = "scale(0)"
             img.classList.add("popUp")
 
@@ -50,6 +51,15 @@ export default class Plate{
             img.appendChild(healthBar)
         this.uiPlate.firstChild.appendChild(img)
         }
+
+
+        if(teamPosition === 8)
+            {
+                var items = document.getElementsByClassName("popUp")
+                items.sort((a, b) => {
+                    return parseInt(a.style.order) - parseInt(b.style.order);
+                  });
+            }
     }
     updateHealthBar(health , attackingTeam){
         var current = (health*40)/100
