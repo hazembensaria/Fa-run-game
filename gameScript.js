@@ -88,14 +88,14 @@ function chooseGuerrier(guerrier , castle , uiList){
 
 
 function startSequence(callBack){
-    setTimeout(function(){road.moveBlue(blueCastle , callBack , redCastle)} , 1000)
+    setTimeout(function(){road.moveBlue(blueCastle , callBack , redCastle)} , 100)
 }
 
 
 function attacking(callBack){
     setTimeout(function(){
         road.blueTeamAttack(blueCastle , callBack , redCastle)
-    },3000)
+    },100)
 }
 
 

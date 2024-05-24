@@ -31,7 +31,7 @@ checkIfRedFightersExist(){
     this.redPosition = []
     for(let i =0 ; i< this.plateList.length ; i++){
         if(this.plateList[i].redGuerrierFighters.length !==0){
-            this.redPosition.unshift(i)
+            this.redPosition.push(i)
             console.log('red fighters exists!')
     }   
 }
@@ -72,7 +72,7 @@ console.log(this.bluePosition[0])
         else
         this.moveBlue( secodeCastel , callBack , castle);
 
-    }, 1000);
+    }, 100);
 }
 
 
@@ -107,7 +107,7 @@ console.log(this.bluePosition[0])
         }
         else
         callBack()
-    }, 1000);
+    }, 100);
 }
 
 
@@ -144,7 +144,7 @@ blueTeamAttack(castle , callBack , secondeCastel){
             }else{
                 this.redTeamAttack(secondeCastel ,callBack , castle) 
             }
-         },3000)
+         },100)
 
 }
 
@@ -179,7 +179,7 @@ redTeamAttack(castle , callBack , secondeCastel){
             }else{
                 this.blueTeamAttack(secondeCastel  , callBack , castle) 
             }
-         },3000)
+         },100)
 
 }
 }
