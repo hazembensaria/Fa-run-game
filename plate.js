@@ -49,17 +49,13 @@ export default class Plate{
             actuelHealth.style.borderRadius = "3px"
 
             img.appendChild(healthBar)
-        this.uiPlate.firstChild.appendChild(img)
+            if(teamPosition === 8){
+            this.uiPlate.firstChild.insertBefore(img , this.uiPlate.firstChild.firstChild)
+                }
+            else{
+            this.uiPlate.firstChild.appendChild(img)}
         }
 
-
-        if(teamPosition === 8)
-            {
-                var items = document.getElementsByClassName("popUp")
-                items.sort((a, b) => {
-                    return parseInt(a.style.order) - parseInt(b.style.order);
-                  });
-            }
     }
     updateHealthBar(health , attackingTeam){
         var current = (health*40)/100

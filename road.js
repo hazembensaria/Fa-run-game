@@ -78,7 +78,7 @@ console.log(this.bluePosition[0])
 
 
  moveBlue(castle  , callBack , secondeCastel){
-    if(this.plateList[this.bluePosition[0]+1].redGuerrierFighters.length !==0){
+    if(this.plateList[this.bluePosition[0]+1].redGuerrierFighters.length !==0 && this.bluePosition[0] !==7){
        
             this.moveRed(secondeCastel , callBack , castle);
                 console.log("finishhhhhhhhh from reddd !!!!")
