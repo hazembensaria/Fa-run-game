@@ -355,11 +355,53 @@
 .cancelInfoButton:hover{
     cursor: pointer;
 }
+
+.leftAlertToast{
+    
+    display :flex;
+    position : absolute;
+    background-color:#ebc8c4;
+    color :#ab3230;
+    top : 5rem;
+    left : -250px;
+    border-radius :5px;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border: #ab3230 1px solid;
+    animation: popup 0.3s ease-in-out;
+}
+.rightAlertToast{
+    
+    display :flex;
+    position : absolute;
+    background-color:#ebc8c4;
+    color :#ab3230;
+    top : 15rem;
+    right : -250px;
+    border-radius :5px;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border: #ab3230 1px solid;
+    animation: popup 0.3s ease-in-out;
+}
+.killAlertToast{
+    animation: popout 0.2s ease-in-out;
+}
 @keyframes popup{
     0%{
         transform: scale(0);
     }
     100%{
         transform: scale(1);
+    }
+}
+@keyframes popout{
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0);
     }
 }

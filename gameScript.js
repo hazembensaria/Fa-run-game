@@ -6,6 +6,7 @@ import Elf from './elf.js';
 import Nain from './nain.js';
 import Road from './road.js';
 import Stone from './stone.js'; 
+import Toast from './toast.js';
 const Container = document.getElementById('container'); 
 
 var blueCastleInfo = document.getElementById('blueCastleInfo')
@@ -19,6 +20,7 @@ var blueCastle = new Castle("images/bleucastle2.png",
    ["images/elfRed.png","images/chefElfRed.png","images/nainRed.png","images/chefNainRed.png" ],
    "red"
    )
+   var toast = new Toast()
    var road = new Road();
    var buildUi =  new BuildUi()
    var blueGuerrierList
@@ -194,6 +196,8 @@ function teamIsReady(castle , castleInfoUi ){
     else if(castle.chosenGuerrier.length===0 && castle.tmpChosenGuerrierList.length===0)
         {
             console.log('you dont have any guerrier in field!')
+            castle.name === "blue" ?toast.alertToast(blueCastleInfo , "dont have any guerrier !!!!" , "leftAlertToast") : toast.alertToast(redCastleInfo , "dont have any guerrier !!!!" , "rightAlertToast") 
+
             return;
         }
     
