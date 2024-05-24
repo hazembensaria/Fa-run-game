@@ -126,6 +126,20 @@
     flex-direction: column;
     align-items: start !important;
 }
+.shrinkInfoRed  div  div{
+    display: none !important;
+}
+.shrinkInfoRed .cancelInfoButton{
+    display: none !important;
+
+}
+.shrinkInfoBlue:last-child{
+    display: none !important;
+}
+.shrinkInfoBlue .cancelInfoButton{
+    display: none !important;
+
+}
 .strechInfoRed{
     height: 300px !important;
     top: 5% !important;
@@ -314,6 +328,32 @@
 .popUp{
   animation: popup .5s ease-in-out;
     /* transition: all .5s ease-in-out; */
+}
+
+
+.playButton:hover{
+    cursor: pointer;
+}
+
+
+.cancelInfoButton{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: .3rem;
+    left: 92%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: all  1s ease-in-out;
+
+
+}
+.cancelInfoButton:hover{
+    cursor: pointer;
 }
 @keyframes popup{
     0%{

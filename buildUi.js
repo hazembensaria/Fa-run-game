@@ -32,8 +32,14 @@ export default class BuildUi{
         guerrierInfo.style.gap = "space-event"
         guerrierInfo.style.justifyContent = "center"
         guerrierInfo.style.overflow = "hidden"
-    
-    
+
+          
+            var cancelRed = document.createElement('div')
+      
+            cancelRed.classList.add("cancelInfoButton")
+            cancelRed.textContent = "X"
+            castleInfo.appendChild(cancelRed)
+
     
         castleInfo.appendChild(guerrierInfo)
         // --------------------------------------
@@ -55,7 +61,7 @@ export default class BuildUi{
         playButton.style.borderRadius= "5px"    
         playButton.style.textAlign= "center"
         playButton.style.color= "white"
-        
+        playButton.classList.add("playButton")
     
         playButton.textContent ="go fight"
         guerrierList.appendChild(playButton)
@@ -68,7 +74,7 @@ export default class BuildUi{
         console.log(guerrierList)   
         // -----------------------------
         this.showGuerrier(castle , guerrierInfo , className)
-        callBack(guerrierList , playButton)
+        callBack(guerrierList , playButton , cancelRed)
     }  
     
      createImg(src , element , canTrain){
@@ -158,6 +164,9 @@ export default class BuildUi{
         buildInfoSection(blueCastle , redCastle , blueCastleInfo , redCastleInfo , container ,  callBack){
             var img = document.createElement('img');
             var img1 = document.createElement('img');
+        
+            
+
             img.src = blueCastle.image
             img.alt = 'image'; 
             img1.src = redCastle.image
@@ -192,9 +201,10 @@ export default class BuildUi{
             blueInfoDiv.append(blutextDiv)
             redInfoDiv.append(redTextDiv)
          
-         
              blueCastleInfo.appendChild(blueInfoDiv)
              redCastleInfo.appendChild(redTextDiv)
+            
+
              callBack(img , img1)
            
         }

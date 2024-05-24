@@ -104,6 +104,8 @@ async function startFight(){
 startSequence(()=>{
     console.log('moving completed!!!!!!!!!')
     attacking(()=>{
+        road.checkIfBlueWin()
+        road.checkIfRedWin()
     console.log('round complted!!!!!!!!!')
     console.log(blueCastle.chosenGuerrier)
     console.log(redCastle.chosenGuerrier)
@@ -209,8 +211,14 @@ function showFullInfo(){
       buildUi.shrinkCastleInfo(blueCastle , blueCastleInfo)
     }
     else{
-    buildUi.drowInfoInterface(blueGuerrierList , blueCastleInfo , blueCastle , "bleuGuerrier" , (list , button)=>{
+    buildUi.drowInfoInterface(blueGuerrierList , blueCastleInfo , blueCastle , "bleuGuerrier" , (list , button , cancelRed)=>{
         blueGuerrierList = list
+        cancelRed.addEventListener("click" , function(){
+        blueCastleInfo.classList.remove("stretchInfoBlue")
+
+        blueCastleInfo.classList.add("shrinkInfoBlue")
+
+        })
         
         button.addEventListener("click" , function(){
             teamIsReady(blueCastle , blueCastleInfo)
@@ -236,8 +244,9 @@ function showFullInfo(){
         buildUi.shrinkCastleInfo(redCastle , redCastleInfo)
     }
     else{
-        buildUi.drowInfoInterface(redGuerrierList , redCastleInfo , redCastle , "redGuerrier" , (list , button)=>{
+        buildUi.drowInfoInterface(redGuerrierList , redCastleInfo , redCastle , "redGuerrier" , (list , button , cancelRed)=>{
             redGuerrierList = list
+            
             button.addEventListener("click" , function(){
                 teamIsReady(redCastle , redCastleInfo)
                 }) 
@@ -249,6 +258,12 @@ function showFullInfo(){
         })
     }
      redCastleInfo.classList.add("strechInfoRed")
+
+     cancelRed.addEventListener("click" , function(){
+         redCastleInfo.classList.remove("strechInfoRed")
+         redCastleInfo.classList.add("shrinkInfoRed")
+         
+         })
 
 
     } )

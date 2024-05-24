@@ -15,7 +15,13 @@ export default class Road{
     clearReadyTeamsToFight(){
         this.readyTeamsToFight = 0
     }
-
+    checkIfBlueWin(){
+        if(this.bluePosition[0] === 8){
+            alert("blue team win")
+            location.reload()
+            console.log("blue team win")
+        }
+    }
     checkIfBlueFightersExist(){
         this.bluePosition =[]
         for(let i =0 ; i< this.plateList.length ; i++){
@@ -26,7 +32,13 @@ export default class Road{
     }
     this.bluePosition.push(0)
 }
-
+checkIfRedWin(){
+    if(this.redPosition[0] === 0){
+        alert("red team win")
+        location.reload()
+        console.log("red team win")
+    }
+}
 checkIfRedFightersExist(){
     this.redPosition = []
     for(let i =0 ; i< this.plateList.length ; i++){
@@ -78,7 +90,7 @@ console.log(this.bluePosition[0])
 
 
  moveBlue(castle  , callBack , secondeCastel){
-    if(this.plateList[this.bluePosition[0]+1].redGuerrierFighters.length !==0 && this.bluePosition[0] !==7){
+    if(this.plateList[this.bluePosition[0]+1].redGuerrierFighters.length !==0 && this.bluePosition[0] ===0){
        
             this.moveRed(secondeCastel , callBack , castle);
                 console.log("finishhhhhhhhh from reddd !!!!")
