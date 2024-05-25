@@ -1,9 +1,59 @@
-console.log("hello game !")
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     playMP3('sounds/backgroundEffect.mp3');
-//   });
+document.addEventListener('DOMContentLoaded', function() {
+  // alert("sqd")
+        localStorage.setItem("gameOn" , false)
+  });
+
+  var blueLeftArrow = document.getElementById("blueLeftArrow")
+  var blueRightArrow = document.getElementById("blueRightArrow")
+  var redLeftArrow = document.getElementById("redLeftArrow")
+  var redRightArrow = document.getElementById("redRightArrow")
+
+  var rightArrows = document.getElementsByClassName("rightArrow")
+  var blueAvatar = document.getElementById("blueAvatar")
+  var redAvatar = document.getElementById("redAvatar")
+
+  avatarList= ["avatar1" ,"avatar2" ,"avatar3","avatar4","avatar5"]
   
+
+
+
+    blueLeftArrow.addEventListener("click" , previousAvatar)
+    blueRightArrow.addEventListener("click" , nextAvatar)
+    redLeftArrow.addEventListener("click" , redPreviousAvatar)
+    redRightArrow.addEventListener("click" , redNextAvatar)
+  
+  // for(let i = 0 ; i< rightArrows.length ; i++){
+  //   rightArrows[i].addEventListener("click" , previousAvatar)
+  // }
+var j = 0
+  function nextAvatar(){
+    const audio = new Audio("sounds/hover.mp3")
+    audio.play();
+    j === avatarList.length-1 ? j = 0 : j++ 
+      blueAvatar.src = `images/${avatarList[j]}.png`
+  } 
+
+  function previousAvatar(){
+    const audio = new Audio("sounds/hover.mp3")
+    audio.play();
+    j === 0 ? j = avatarList.length-1 : j-- 
+      blueAvatar.src = `images/${avatarList[j]}.png`
+  }
+k = 0
+  function redNextAvatar(){
+    const audio = new Audio("sounds/hover.mp3")
+    audio.play();
+    k === avatarList.length-1 ? k = 0 : k++ 
+      redAvatar.src = `images/${avatarList[k]}.png`
+  } 
+
+  function redPreviousAvatar(){
+    const audio = new Audio("sounds/hover.mp3")
+    audio.play();
+    k === 0 ? k = avatarList.length-1 : k-- 
+      redAvatar.src = `images/${avatarList[k]}.png`
+  }
 //   function play() {
 //     const audio = new Audio("sounds/backgroundEffect.mp3");
 //     if(audio.paused)
@@ -29,3 +79,5 @@ function stop() {
   audio.pause();
   audio.currentTime = 0;
 }
+
+

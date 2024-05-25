@@ -28,6 +28,9 @@ var blueCastle = new Castle("images/bleucastle2.png",
 //    var blueGuerrirList = [] ;
     
 function loadUi(){
+    if(localStorage.getItem("gameOn") === false)
+        // alert(localStorage.getItem("gameOn"))
+    {toast.gameBeginToast(Container)}
    for(let i = 0; i<9 ; i++  ){
     road.plateList[i].setUiPlate(document.getElementById(`test${i}`))
    }

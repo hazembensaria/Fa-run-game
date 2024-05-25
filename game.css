@@ -389,6 +389,27 @@
 .killAlertToast{
     animation: popout 0.2s ease-in-out;
 }
+.gameBeginToastButton{
+    width: 100px;
+    height: 50px;
+    background-color: #ab3230;
+    position: absolute;
+    /* background-color: #fff; */
+}
+.gameBeginToast{
+    width: 100vw !important;
+    height: 100vh;
+    position: absolute;
+    top: -100%;
+    left: 0rem;
+    z-index: 9999999;
+    background-color: rgba(255, 255, 255 , 0.2);
+    backdrop-filter: blur(10px);
+    transform: translateY(100%);
+    box-sizing: border-box;
+    transition: all 1s ease-in-out;
+}
+
 @keyframes popup{
     0%{
         transform: scale(0);
