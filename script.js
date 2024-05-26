@@ -8,6 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
   var blueRightArrow = document.getElementById("blueRightArrow")
   var redLeftArrow = document.getElementById("redLeftArrow")
   var redRightArrow = document.getElementById("redRightArrow")
+  var playButton = document.getElementById("playButton")
+  var blueInput = document.getElementById("blueName")
+  var redInput = document.getElementById("redName")
+
+
+
+
 
   var rightArrows = document.getElementsByClassName("rightArrow")
   var blueAvatar = document.getElementById("blueAvatar")
@@ -19,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     blueLeftArrow.addEventListener("click" , previousAvatar)
+    playButton.addEventListener("click" , gameOn)
+
     blueRightArrow.addEventListener("click" , nextAvatar)
     redLeftArrow.addEventListener("click" , redPreviousAvatar)
     redRightArrow.addEventListener("click" , redNextAvatar)
@@ -53,6 +62,15 @@ k = 0
     audio.play();
     k === 0 ? k = avatarList.length-1 : k-- 
       redAvatar.src = `images/${avatarList[k]}.png`
+  }
+
+  function gameOn(){
+    console.log()
+    localStorage.setItem("blueAvatar" ,`images/${avatarList[j]}.png` )
+    localStorage.setItem("blueName" , blueName.value)
+    localStorage.setItem("redAvatar" ,`images/${avatarList[k]}.png` )
+    localStorage.setItem("redName" , redName.value)
+    window.location.href = "game.html";
   }
 //   function play() {
 //     const audio = new Audio("sounds/backgroundEffect.mp3");

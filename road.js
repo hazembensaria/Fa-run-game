@@ -123,9 +123,9 @@ console.log(this.bluePosition[0])
 }
 
 
+blueTeamAttack(castle , callBack , secondeCastel , toast , container){
+    toast.alertToastBlue(container , "we are attacking !" , "rightAlertToast" , "info")
 
-blueTeamAttack(castle , callBack , secondeCastel){
-    console.log( 'blue start attack')
 
     var platau = this.plateList[this.bluePosition[0]]
        for(let i = 0 ; i<  platau.blueGuerrierFighters.length ; i++){
@@ -143,7 +143,7 @@ blueTeamAttack(castle , callBack , secondeCastel){
             console.log(platau.redGuerrierFighters)
 
             if(platau.redGuerrierFighters.length===0){
-                castle.winRound()
+                castle.winRound(castle.name , toast , container)
                 break;
 
             }
@@ -154,15 +154,15 @@ blueTeamAttack(castle , callBack , secondeCastel){
             if(platau.redGuerrierFighters.length===0){
                 callBack()
             }else{
-                this.redTeamAttack(secondeCastel ,callBack , castle) 
+                this.redTeamAttack(secondeCastel ,callBack , castle ,  toast , container) 
             }
-         },100)
+         },3000)
 
 }
 
 
-redTeamAttack(castle , callBack , secondeCastel){
-    console.log( 'red start attack')
+redTeamAttack(castle , callBack , secondeCastel , toast , container){
+    toast.alertToast(container , "we are attacking !" , "leftAlertToast" , "info")
 
     var platau = this.plateList[this.bluePosition[0]]
     for(let i = 0 ; i<  platau.redGuerrierFighters.length ; i++){
@@ -179,7 +179,7 @@ redTeamAttack(castle , callBack , secondeCastel){
         console.log(platau.blueGuerrierFighters)
         console.log(platau.redGuerrierFighters)
         if(platau.blueGuerrierFighters.length===0)
-            {   castle.winRound()
+            {   castle.winRound(castle.name , toast , container)
                 break;}
         // console.log(list);
      }
@@ -189,9 +189,9 @@ redTeamAttack(castle , callBack , secondeCastel){
             if(platau.blueGuerrierFighters.length===0){
                 callBack()
             }else{
-                this.blueTeamAttack(secondeCastel  , callBack , castle) 
+                this.blueTeamAttack(secondeCastel  , callBack , castle , toast , container) 
             }
-         },100)
+         },3000)
 
 }
 }

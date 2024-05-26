@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -19,14 +22,14 @@
       </div>
   </div>
 
-  <button  class="playButton"><a href="game.html">play</a></button>
+  <button  id="playButton">play</button>
   <img class="bounc" style="position: absolute; top: 50%; left: 25%; z-index: 1; width: 17rem; " src="images/nainRed.png" alt="">
   <img class="bounc" style="position: absolute; top: 50%; right: 23%; z-index: 1; width: 17rem;" src="images/chefElfBlue.png" alt="">
 
   <div class="redPlayer">
     <img style="width: 128px; position: absolute; top: -10%; left: 30%; z-index: 2;" src="images/frame.png" alt="">
     <img  id="redAvatar" style="width: 100px; border-radius: 50%; position: absolute; top: -7%; left: 34%;" src="images/avatar1.png" alt="">
-    <input type="text" name="" id="" placeholder="red player name">
+    <input type="text" name="" id="redName" placeholder="red player name">
   <img id="redLeftArrow" class="leftArrow" style="position: absolute; top : 17%; left: 37%; z-index: 2; width: 30px; transform: rotate(180deg);" src="images/arrow.png" alt="">
   <img id="redRightArrow" class="rightArrow" style="position: absolute; top : 17%; left: 53%; z-index: 6; width: 30px;" src="images/arrow.png" alt="">
 
@@ -34,7 +37,7 @@
   <div class="bluePlayer">
     <img style="width: 128px; position: absolute; top: -10%; left: 30%; z-index: 2;" src="images/frame.png" alt="">
     <img id="blueAvatar" style="width: 100px; border-radius: 50%; position: absolute; top: -7%; left: 34%;" src="images/avatar1.png" alt="">
-    <input type="text" placeholder="blue player name" >
+    <input id="blueName" type="text" placeholder="blue player name" >
     <img  id="blueLeftArrow" class="leftArrow" style="position: absolute; top: 17%; left: 37%; z-index: 2; width: 30px; transform: rotate(180deg);" src="images/arrow.png" alt="">
     <img  id="blueRightArrow" class="rightArrow" style="position: absolute; top: 17%; left: 53%; z-index: 2; width: 30px;" src="images/arrow.png" alt="">
   </div>

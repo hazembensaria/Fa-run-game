@@ -47,15 +47,10 @@ export default class Plate{
             actuelHealth.style.width = `${health}px`
             actuelHealth.style.height = "100%"
             actuelHealth.style.borderRadius = "3px"
-            actuelHealth.style.display = "flex"
-            actuelHealth.style.justifyContent = "center"
-            actuelHealth.style.alignItems = "center"
-            actuelHealth.style.fontSize = "10px"
-            actuelHealth.style.color = "white"
+   
 
 
 
-            actuelHealth.textContent = `${fightersList[i].vie}`
 
             img.appendChild(healthBar)
             if(teamPosition === 8){

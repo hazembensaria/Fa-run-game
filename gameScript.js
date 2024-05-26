@@ -4,11 +4,13 @@ import ChefElf from './chefElf.js';
 import ChefNain from './chefNain.js';
 import Elf from './elf.js';
 import Nain from './nain.js';
+import player from './player.js';
 import Road from './road.js';
 import Stone from './stone.js'; 
 import Toast from './toast.js';
 const Container = document.getElementById('container'); 
-
+var redFrame 
+var blueFrame
 var blueCastleInfo = document.getElementById('blueCastleInfo')
 var redCastleInfo = document.getElementById('redCastleInfo')
 var blueCastle = new Castle("images/bleucastle2.png",
@@ -23,22 +25,26 @@ var blueCastle = new Castle("images/bleucastle2.png",
    var toast = new Toast()
    var road = new Road();
    var buildUi =  new BuildUi()
+   var redPlayer = new player(localStorage.getItem("redAvatar") , localStorage.getItem("redName"))
+   var bluePlayer = new player(localStorage.getItem("blueAvatar") , localStorage.getItem("blueName"))
+
    var blueGuerrierList
    var redGuerrierList
 //    var blueGuerrirList = [] ;
     
 function loadUi(){
-    if(localStorage.getItem("gameOn") === false)
         // alert(localStorage.getItem("gameOn"))
-    {toast.gameBeginToast(Container)}
+    {toast.gameBeginToast(Container  , redPlayer , bluePlayer)}
    for(let i = 0; i<9 ; i++  ){
     road.plateList[i].setUiPlate(document.getElementById(`test${i}`))
    }
    console.log(blueCastle , redCastle)
-   buildUi.buildInfoSection(blueCastle , redCastle , blueCastleInfo , redCastleInfo , Container ,  (img , img1)=>{
+   buildUi.buildInfoSection(blueCastle , redCastle , blueCastleInfo , redCastleInfo ,  Container , redPlayer , bluePlayer  , (img , img1 , redF , blueF)=>{
     img.addEventListener("mouseover" , bleuCastleHover)
     img.addEventListener("click" , showFullInfo)
 img1.addEventListener("click" , showFullInfoRed)
+redFrame = redF
+ blueFrame = blueF
 
 
 img1.addEventListener("mouseover" , redCastleHover)
@@ -99,8 +105,8 @@ function startSequence(callBack){
 
 function attacking(callBack){
     setTimeout(function(){
-        road.blueTeamAttack(blueCastle , callBack , redCastle)
-    },100)
+        road.blueTeamAttack(blueCastle , callBack , redCastle , toast , Container)
+    },3000)
 }
 
 
@@ -151,13 +157,13 @@ function teamIsReady(castle , castleInfoUi ){
      */
         if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="blue")
             {
-                console.log('hope you win blue')
+                toast.alertToastBlue(Container , "hope you win !" , "rightAlertToast" , "worning")
                 road.bluePosition.pop()
                 
             }
             else if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="red")
                 {
-                    console.log('hope you win red')
+                    toast.alertToast(Container , "hope you win !" , "leftAlertToast" , "worning")
                     road.redPosition.pop()
                     
                 }
@@ -175,6 +181,7 @@ function teamIsReady(castle , castleInfoUi ){
 
         castleInfoUi.classList.add("shrinkInfoBlue")
         castleInfoUi.classList.remove("strechInfoBlue") //blueCastleInfo
+        toast.alertToastBlue(Container , "let's win this round !" , "rightAlertToast" , "info")
     }else{  
         castle.confirmGuerrier()
         // console.log(road.plateList[8].uiPlate.style)
@@ -191,6 +198,7 @@ function teamIsReady(castle , castleInfoUi ){
 
         castleInfoUi.classList.add("shrinkInfoRed")
         castleInfoUi.classList.remove("strechInfoRed") //redCastleInfo
+        toast.alertToast(Container , "smart pick, let's win this !" , "leftAlertToast" , "info")
     }
 
     } 
@@ -199,7 +207,7 @@ function teamIsReady(castle , castleInfoUi ){
     else if(castle.chosenGuerrier.length===0 && castle.tmpChosenGuerrierList.length===0)
         {
             console.log('you dont have any guerrier in field!')
-            castle.name === "blue" ?toast.alertToast(blueCastleInfo , "dont have any guerrier !!!!" , "leftAlertToast") : toast.alertToast(redCastleInfo , "dont have any guerrier !!!!" , "rightAlertToast") 
+            castle.name === "blue" ?toast.alertToastBlue(Container , "dont have any guerrier !!!!" , "rightAlertToast" , "alert") : toast.alertToast(Container , "dont have any guerrier !!!!" , "leftAlertToast" , "alert") 
 
             return;
         }
@@ -280,7 +288,7 @@ document.addEventListener("DOMContentLoaded"  , loadUi);
 document.addEventListener('keydown', function(event) {
     if (event.key === "Escape" || event.key === 27) {
       // Escape key pressed
-      console.log("Escape key pressed");
+      toast.gameBeginToast(Container  , redPlayer , bluePlayer)
       // Add your code to handle the escape key press here
     }
   });

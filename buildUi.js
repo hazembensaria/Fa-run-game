@@ -31,6 +31,8 @@ export default class BuildUi{
         guerrierInfo.style.borderBottom = "lightgray 1px solid"
         guerrierInfo.style.gap = "space-event"
         guerrierInfo.style.justifyContent = "center"
+        guerrierInfo.style.zIndex = "9999999"
+
         guerrierInfo.style.overflow = "hidden"
 
           
@@ -161,11 +163,34 @@ export default class BuildUi{
         }
 
 
-        buildInfoSection(blueCastle , redCastle , blueCastleInfo , redCastleInfo , container ,  callBack){
+        buildInfoSection(blueCastle , redCastle , blueCastleInfo , redCastleInfo , container  , redPlayer , bluePlayer ,  callBack){
             var img = document.createElement('img');
             var img1 = document.createElement('img');
         
-            
+            var redName = document.createElement("div")
+            var blueName = document.createElement("div")
+            redName.textContent = redPlayer.name
+            blueName.textContent = bluePlayer.name
+            var redFrame = document.createElement("img")
+            var blueFrame = document.createElement("img")
+            var blueImg = document.createElement("img")
+            var redImg = document.createElement("img")
+            redFrame.classList.add("redFrameGame")
+            blueFrame.classList.add("blueFrameGame")
+            redImg.classList.add("redImageGame")
+            blueImg.classList.add("blueImageGame")
+            redName.classList.add("redNameGame")
+            blueName.classList.add("blueNameGame")
+            redFrame.src = "images/frame.png"
+        blueFrame.src = "images/frame.png"
+        blueImg.src = bluePlayer.avatar
+        redImg.src = redPlayer.avatar
+        container.appendChild(redFrame)
+        container.appendChild(blueFrame)
+        container.appendChild(redImg)
+        container.appendChild(blueImg)
+        container.appendChild(redName)
+        container.appendChild(blueName)
 
             img.src = blueCastle.image
             img.alt = 'image'; 
@@ -205,7 +230,7 @@ export default class BuildUi{
              redCastleInfo.appendChild(redTextDiv)
             
 
-             callBack(img , img1)
+             callBack(img , img1 , redFrame , blueFrame)
            
         }
 
