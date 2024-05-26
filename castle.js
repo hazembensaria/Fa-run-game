@@ -26,9 +26,9 @@ import Nain from "./nain.js";
     
     winRound(name , toast , container){
         if(name=== "blue")
-        toast.alertToastBlue(container , "we win this round !!" , "rightAlertToast" , "info")
+        toast.alertToastBlue(container , "we win this round 👏👏" , "rightAlertToast" , "info")
     else
-        toast.alertToast(container , "we win this round !!!" , "leftAlertToast" , "info")
+        toast.alertToast(container , "we win this round 👏👏" , "leftAlertToast" , "info")
 
         this.winingRounds+=1
     }

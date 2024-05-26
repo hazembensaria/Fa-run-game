@@ -202,10 +202,10 @@ export default class BuildUi{
             img.classList.add("blueCastle");
             img1.classList.add("redCastle");
          
-            const blutext = document.createTextNode(`resorces: ${blueCastle.resource} `)
-            const blutext1 = document.createTextNode(`wining rounds: ${blueCastle.winingRounds} `)
-            const redtext = document.createTextNode(`resorces: ${redCastle.resource} `)
-            const redtext1 = document.createTextNode(`wining rounds: ${redCastle.winingRounds} `)
+            const blutext = document.createTextNode(`resorces💰: ${blueCastle.resource} `)
+            const blutext1 = document.createTextNode(`wining rounds🥇: ${blueCastle.winingRounds} `)
+            const redtext = document.createTextNode(`resorces💰: ${redCastle.resource} `)
+            const redtext1 = document.createTextNode(`wining rounds🥇: ${redCastle.winingRounds} `)
             const blutextDiv = document.createElement('div')
             const redTextDiv = document.createElement('div')
             const blueInfoDiv = document.createElement('div')

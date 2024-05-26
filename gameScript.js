@@ -157,13 +157,13 @@ function teamIsReady(castle , castleInfoUi ){
      */
         if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="blue")
             {
-                toast.alertToastBlue(Container , "hope you win !" , "rightAlertToast" , "worning")
+                toast.alertToastBlue(Container , "hope you win 🙇‍♂️!" , "rightAlertToast" , "worning")
                 road.bluePosition.pop()
                 
             }
             else if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="red")
                 {
-                    toast.alertToast(Container , "hope you win !" , "leftAlertToast" , "worning")
+                    toast.alertToast(Container , "hope you win 🙇!" , "leftAlertToast" , "worning")
                     road.redPosition.pop()
                     
                 }
@@ -181,7 +181,7 @@ function teamIsReady(castle , castleInfoUi ){
 
         castleInfoUi.classList.add("shrinkInfoBlue")
         castleInfoUi.classList.remove("strechInfoBlue") //blueCastleInfo
-        toast.alertToastBlue(Container , "let's win this round !" , "rightAlertToast" , "info")
+        toast.alertToastBlue(Container , "let's win this round💪 !" , "rightAlertToast" , "info")
     }else{  
         castle.confirmGuerrier()
         // console.log(road.plateList[8].uiPlate.style)
@@ -198,7 +198,7 @@ function teamIsReady(castle , castleInfoUi ){
 
         castleInfoUi.classList.add("shrinkInfoRed")
         castleInfoUi.classList.remove("strechInfoRed") //redCastleInfo
-        toast.alertToast(Container , "smart pick, let's win this !" , "leftAlertToast" , "info")
+        toast.alertToast(Container , "smart pick, let's win this💪 !" , "leftAlertToast" , "info")
     }
 
     } 
@@ -207,7 +207,7 @@ function teamIsReady(castle , castleInfoUi ){
     else if(castle.chosenGuerrier.length===0 && castle.tmpChosenGuerrierList.length===0)
         {
             console.log('you dont have any guerrier in field!')
-            castle.name === "blue" ?toast.alertToastBlue(Container , "dont have any guerrier !!!!" , "rightAlertToast" , "alert") : toast.alertToast(Container , "dont have any guerrier !!!!" , "leftAlertToast" , "alert") 
+            castle.name === "blue" ?toast.alertToastBlue(Container , "dont have any guerrier 🤦‍♂️!!!!" , "rightAlertToast" , "alert") : toast.alertToast(Container , "dont have any guerrier🤦 !!!!" , "leftAlertToast" , "alert") 
 
             return;
         }
