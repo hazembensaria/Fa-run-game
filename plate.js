@@ -23,6 +23,7 @@ export default class Plate{
             img.style.height = height
             img.style.zIndex = "999"
             img.style.position = "relative"
+            img.style.filter = `drop-shadow(4px 7px 4px ${color})`
             img.style.backgroundImage = `url(${fightersList[i].image})`
             img.style.backgroundSize = "100% 100%"
             color ==="red" ? img.style.order = `${i+1}` : img.style.order = "0"
@@ -73,6 +74,8 @@ export default class Plate{
         console.log("health updated")
 
     }
+
+
     eraiseKilledFighter(attackingTeam){
         attackingTeam === "blue"? 
         this.uiPlate.firstChild.removeChild(this.uiPlate.firstChild.children[this.blueGuerrierFighters.length]):

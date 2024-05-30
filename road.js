@@ -5,7 +5,7 @@ export default class Road{
     constructor(){
         this.bluePosition = [0]
         this.redPosition = [8]
-        this.readyTeamsToFight = 0 ;
+        this.readyTeamsToFight = new Map() ;
         for(let i =0 ; i< 9 ; i++){
             this.plateList.push(new Plate());
         }
@@ -13,7 +13,7 @@ export default class Road{
     }
 
     clearReadyTeamsToFight(){
-        this.readyTeamsToFight = 0
+        this.readyTeamsToFight.clear()
     }
     checkIfBlueWin(toast , Container , redPlayer , bluePlayer){
         if(this.bluePosition[0] === 8){
@@ -85,7 +85,7 @@ console.log(this.bluePosition[0])
         else
         this.moveBlue( secodeCastel , callBack , castle);
 
-    }, 1000);
+    }, 100);
 }
 
 
@@ -120,7 +120,7 @@ console.log(this.bluePosition[0])
         }
         else
         callBack()
-    }, 1000);
+    }, 100);
 }
 
 
@@ -157,7 +157,7 @@ blueTeamAttack(castle , callBack , secondeCastel , toast , container){
             }else{
                 this.redTeamAttack(secondeCastel ,callBack , castle ,  toast , container) 
             }
-         },1500)
+         },1000)
 
 }
 
@@ -177,8 +177,6 @@ redTeamAttack(castle , callBack , secondeCastel , toast , container){
         
         var firstItem = platau.redGuerrierFighters.shift();
         platau.redGuerrierFighters.push(firstItem);
-        console.log(platau.blueGuerrierFighters)
-        console.log(platau.redGuerrierFighters)
         if(platau.blueGuerrierFighters.length===0)
             {   castle.winRound(castle.name , toast , container)
                 break;}
@@ -192,7 +190,7 @@ redTeamAttack(castle , callBack , secondeCastel , toast , container){
             }else{
                 this.blueTeamAttack(secondeCastel  , callBack , castle , toast , container) 
             }
-         },1500)
+         },1000)
 
 }
 }

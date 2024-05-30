@@ -155,9 +155,6 @@ export default class BuildUi{
             img2.setAttribute("cost" ,castle.tmpChosenGuerrierList[len].resource)
             console.log(list)
             list.appendChild(img2)
-            img2.addEventListener("click" , function(){
-               removeGuerrier(this , castle)
-            })
             callBack(img2)
         // })
         }

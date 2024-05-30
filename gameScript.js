@@ -4,7 +4,7 @@ import ChefElf from './chefElf.js';
 import ChefNain from './chefNain.js';
 import Elf from './elf.js';
 import Nain from './nain.js';
-import player from './player.js';
+import Player from './player.js';
 import Road from './road.js';
 import Stone from './stone.js'; 
 import Toast from './toast.js';
@@ -25,8 +25,8 @@ var blueCastle = new Castle("images/bleucastle2.png",
    var toast = new Toast()
    var road = new Road();
    var buildUi =  new BuildUi()
-   var redPlayer = new player(localStorage.getItem("redAvatar") , localStorage.getItem("redName"))
-   var bluePlayer = new player(localStorage.getItem("blueAvatar") , localStorage.getItem("blueName"))
+   var redPlayer = new Player(localStorage.getItem("redAvatar") , localStorage.getItem("redName"))
+   var bluePlayer = new Player(localStorage.getItem("blueAvatar") , localStorage.getItem("blueName"))
 
    var blueGuerrierList
    var redGuerrierList
@@ -133,6 +133,10 @@ startSequence(()=>{
 
     blueCastle.clameRewards()
     redCastle.clameRewards()
+    buildUi.UpdateGuerrierIuicons(blueCastle , "bleuGuerrier" , "blueText")
+            buildUi.UpdateGuerrierIuicons(redCastle , "redGuerrier" , "redText")
+
+
     })
 })
 
@@ -151,6 +155,10 @@ function teamIsReady(castle , castleInfoUi ){
      */
         if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="blue")
             {
+                if(road.readyTeamsToFight.has(castle.name)){
+                toast.alertToastBlue(Container , "you allready choose fighters!" , "rightAlertToast" , "worning")
+                return ;
+                }
                 castleInfoUi.classList.add("shrinkInfoBlue")
                 castleInfoUi.classList.remove("strechInfoBlue") //blueCastleInfo
                 toast.alertToastBlue(Container , "hope you win 🙇‍♂️!" , "rightAlertToast" , "worning")
@@ -159,6 +167,10 @@ function teamIsReady(castle , castleInfoUi ){
             }
             else if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="red")
                 {
+                    if(road.readyTeamsToFight.has(castle.name)){
+                        toast.alertToast(Container , "you just pick your team !" , "leftAlertToast" , "worning")
+                        return ;
+                        }
                     castleInfoUi.classList.add("shrinkInfoRed")
                     castleInfoUi.classList.remove("strechInfoRed") //redCastleInfo
                     toast.alertToast(Container , "hope you win 🙇!" , "leftAlertToast" , "worning")
@@ -167,32 +179,41 @@ function teamIsReady(castle , castleInfoUi ){
                 }
             else if(castle.tmpChosenGuerrierList.length!==0 ){
     if(castle.name==="blue"){
+        if(road.readyTeamsToFight.has(castle.name)){
+            toast.alertToastBlue(Container , "you allready choose fighters!" , "rightAlertToast" , "worning")
+            return ;
+            }
         castle.confirmGuerrier()    
         road.plateList[road.bluePosition[blueLen]].blueGuerrierFighters = blueCastle.chosenGuerrier[blueCastle.chosenGuerrier.length-1]
         road.plateList[road.bluePosition[blueLen]].drowFighters(road.plateList[road.bluePosition[blueLen]].blueGuerrierFighters, "blue" , "60px" , "80px" ,"45%" ,"-30%")
         road.plateList[road.bluePosition[blueLen]].uiPlate.firstChild.style.justifyContent= "end"
         var bb = document.getElementsByClassName('chosenGuerrierblue')
-        for(let i =0 ; i< bb.length ; i++){
-            bb[i].style.transform= "scale(0)"
-            bb[i].remove()
-        }
+        while (bb.length > 0) {
+            let element = bb[0];
+        
+            element.style.transform = "scale(0)";
+            element.parentNode.removeChild(element);}
 
         castleInfoUi.classList.add("shrinkInfoBlue")
         castleInfoUi.classList.remove("strechInfoBlue") //blueCastleInfo
         toast.alertToastBlue(Container , "let's win this round💪 !" , "rightAlertToast" , "info")
     }else{  
+        if(road.readyTeamsToFight.has(castle.name)){
+            toast.alertToast(Container , "you just pick your team !" , "leftAlertToast" , "worning")
+            return ;
+            }
         castle.confirmGuerrier()
         // console.log(road.plateList[8].uiPlate.style)
         road.plateList[road.redPosition[redLen]].uiPlate.firstChild.style.justifyContent= "start"
         road.plateList[road.redPosition[redLen]].redGuerrierFighters = castle.chosenGuerrier[redCastle.chosenGuerrier.length-1]
         road.plateList[road.redPosition[redLen]].drowFighters(road.plateList[road.redPosition[redLen]].redGuerrierFighters , "red" , "50px" , "70px" , "-50%", "30%")
 
-        var bb = document.getElementsByClassName('chosenGuerrierred')
-        for(let i =0 ; i< bb.length ; i++){
-            bb[i].style.transform= "scale(0)"
-            bb[i].remove()
-
-        }
+        var bRed = document.getElementsByClassName('chosenGuerrierred')
+        while (bRed.length > 0) {
+            let element = bRed[0];
+        
+            element.style.transform = "scale(0)";
+            element.parentNode.removeChild(element);}
 
         castleInfoUi.classList.add("shrinkInfoRed")
         castleInfoUi.classList.remove("strechInfoRed") //redCastleInfo
@@ -209,8 +230,9 @@ function teamIsReady(castle , castleInfoUi ){
 
             return;
         }
-    
-    if(++road.readyTeamsToFight===2)
+        
+      road.readyTeamsToFight.has(castle.name) ? console.log("you just confirmed choice !!") :  road.readyTeamsToFight.set(castle.name , "true")
+    if(road.readyTeamsToFight.size ===2)
         {
             road.clearReadyTeamsToFight()
             startFight()
@@ -220,6 +242,10 @@ function teamIsReady(castle , castleInfoUi ){
 }
 
 function showFullInfo(){
+    if(blueCastleInfo.classList.contains("strechInfoBlue")){
+        console.log("already open")
+        return ;
+    }
     if(blueCastleInfo.classList.contains("shrinkInfoBlue")){
       buildUi.shrinkCastleInfo(blueCastle , blueCastleInfo)
     }
@@ -227,7 +253,7 @@ function showFullInfo(){
     buildUi.drowInfoInterface(blueGuerrierList , blueCastleInfo , blueCastle , "bleuGuerrier" , (list , button , cancelRed)=>{
         blueGuerrierList = list
         cancelRed.addEventListener("click" , function(){
-        blueCastleInfo.classList.remove("stretchInfoBlue")
+        blueCastleInfo.classList.remove("strechInfoBlue")
 
         blueCastleInfo.classList.add("shrinkInfoBlue")
 
@@ -253,6 +279,10 @@ function showFullInfo(){
 
 
   function showFullInfoRed(){
+    if(redCastleInfo.classList.contains("strechInfoRed")){
+        console.log("already open !!")
+        return ;
+    }
     if(redCastleInfo.classList.contains("shrinkInfoRed")){
         buildUi.shrinkCastleInfo(redCastle , redCastleInfo)
     }
