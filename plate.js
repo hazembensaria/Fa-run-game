@@ -10,7 +10,7 @@ export default class Plate{
     setUiPlate(uiPlate){
         this.uiPlate = uiPlate ;
     }
-    drowFighters(fightersList , color , width , height , top , left , teamPosition){
+    drowFighters(fightersList , color , width , height , top , left , teamPosition , name){
         this.uiPlate.style.filter = `drop-shadow(4px 7px 4px ${color})`
         this.uiPlate.style.zIndex = `999`
         this.uiPlate.firstChild.style.top = top
@@ -53,7 +53,8 @@ export default class Plate{
 
 
             img.appendChild(healthBar)
-            if(teamPosition === 8){
+            console.log(this.redGuerrierFighters )
+            if(teamPosition !== 0 && name ==="blue"){
             this.uiPlate.firstChild.insertBefore(img , this.uiPlate.firstChild.firstChild)
                 }
             else{

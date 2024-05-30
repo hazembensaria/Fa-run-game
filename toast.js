@@ -139,13 +139,6 @@ export default class Toast{
         toast.appendChild(redName)
         toast.appendChild(blueName)
 
-
-
-
-
-
-
-
         button.classList.add("gameBeginToastButton")
         toast.appendChild(button)
         button.textContent ="start"
@@ -163,4 +156,53 @@ export default class Toast{
 
     }
 
+
+
+blueWinToast(element , redPlayer , bluePlayer){
+    var toast = document.createElement("div")
+    var redName = document.createElement("div")
+    var blueName = document.createElement("div")
+    redName.textContent = redPlayer.name
+    blueName.textContent = bluePlayer.name
+    var redFrame = document.createElement("img")
+    var blueFrame = document.createElement("img")
+    var blueImg = document.createElement("img")
+    var redImg = document.createElement("img")
+    var vectoryPanel = document.createElement("img")
+    var vectoryFrame = document.createElement("img")
+
+
+    
+    redFrame.classList.add("redFrameBlueWin")
+    blueFrame.classList.add("blueFrameBlueWin")
+    redImg.classList.add("redImageBlueWin")
+    blueImg.classList.add("blueImageBlueWin")
+    redName.classList.add("redNameBlueWin")
+    blueName.classList.add("blueNameBlueWin")
+    vectoryPanel.classList.add("vectoryPanel")
+    vectoryFrame.classList.add("vectoryFrame")
+
+
+    redFrame.src = "images/frame.png"
+    blueFrame.src = "images/frame.png"
+    vectoryPanel.src ="images/vectoryPanel.png"
+    vectoryFrame.src  ="images/vectoryFrame.png"
+    blueImg.src = bluePlayer.avatar
+    redImg.src = redPlayer.avatar
+    toast.appendChild(redFrame)
+    toast.appendChild(blueFrame)
+    toast.appendChild(redImg)
+    toast.appendChild(blueImg)
+    toast.appendChild(redName)
+    toast.appendChild(blueName)
+    toast.appendChild(vectoryPanel)
+    toast.appendChild(vectoryFrame)
+
+    toast.classList.add("gameBeginToast")
+    element.appendChild(toast)
+
+
 }
+
+}
+

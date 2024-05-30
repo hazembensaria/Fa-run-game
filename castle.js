@@ -16,7 +16,7 @@ import Nain from "./nain.js";
 
     clearChisenGeurrier() {
         this.chosenGuerrier= []
-    }
+    }   
 
     clameRewards(){
         

@@ -35,6 +35,7 @@ var blueCastle = new Castle("images/bleucastle2.png",
 function loadUi(){
         // alert(localStorage.getItem("gameOn"))
     {toast.gameBeginToast(Container  , redPlayer , bluePlayer)}
+    // toast.blueWinToast(Container , redPlayer , bluePlayer)
    for(let i = 0; i<9 ; i++  ){
     road.plateList[i].setUiPlate(document.getElementById(`test${i}`))
    }
@@ -115,11 +116,11 @@ async function startFight(){
 startSequence(()=>{
     console.log('moving completed!!!!!!!!!')
     attacking(()=>{
-        road.checkIfBlueWin()
+        road.checkIfBlueFightersExist()
+        road.checkIfRedFightersExist()
+        road.checkIfBlueWin(toast , Container ,redPlayer , bluePlayer)
         road.checkIfRedWin()
-    console.log('round complted!!!!!!!!!')
-    console.log(blueCastle.chosenGuerrier)
-    console.log(redCastle.chosenGuerrier)
+
 
     console.log(road.bluePosition[0] , "this is fighters blue after fight")
     road.plateList[road.bluePosition[0]].blueGuerrierFighters.length!==0 ?
@@ -132,13 +133,6 @@ startSequence(()=>{
 
     blueCastle.clameRewards()
     redCastle.clameRewards()
-    road.checkIfBlueFightersExist()
-    road.checkIfRedFightersExist()
-    console.log(road.bluePosition)
-    console.log(road.redPosition)
-
-
-
     })
 })
 
@@ -157,12 +151,16 @@ function teamIsReady(castle , castleInfoUi ){
      */
         if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="blue")
             {
+                castleInfoUi.classList.add("shrinkInfoBlue")
+                castleInfoUi.classList.remove("strechInfoBlue") //blueCastleInfo
                 toast.alertToastBlue(Container , "hope you win 🙇‍♂️!" , "rightAlertToast" , "worning")
                 road.bluePosition.pop()
                 
             }
             else if(castle.chosenGuerrier.length!==0 && castle.tmpChosenGuerrierList.length===0 && castle.name ==="red")
                 {
+                    castleInfoUi.classList.add("shrinkInfoRed")
+                    castleInfoUi.classList.remove("strechInfoRed") //redCastleInfo
                     toast.alertToast(Container , "hope you win 🙇!" , "leftAlertToast" , "worning")
                     road.redPosition.pop()
                     

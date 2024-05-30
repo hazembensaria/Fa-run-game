@@ -15,10 +15,11 @@ export default class Road{
     clearReadyTeamsToFight(){
         this.readyTeamsToFight = 0
     }
-    checkIfBlueWin(){
+    checkIfBlueWin(toast , Container , redPlayer , bluePlayer){
         if(this.bluePosition[0] === 8){
-            alert("blue team win")
-            location.reload()
+            toast.blueWinToast(Container , redPlayer , bluePlayer)
+
+            // location.reload()
             console.log("blue team win")
         }
     }
@@ -84,7 +85,7 @@ console.log(this.bluePosition[0])
         else
         this.moveBlue( secodeCastel , callBack , castle);
 
-    }, 100);
+    }, 1000);
 }
 
 
@@ -105,7 +106,7 @@ console.log(this.bluePosition[0])
        
         this.plateList[this.bluePosition[i]].uiPlate.firstChild.style.justifyContent= "end"
         this.plateList[this.bluePosition[i]].blueGuerrierFighters = castle.chosenGuerrier[i]
-        this.plateList[this.bluePosition[i]].drowFighters(this.plateList[this.bluePosition[i]].blueGuerrierFighters , "blue" , "60px" , "80px" ,"45%" ,"-30%" , this.bluePosition[0])
+        this.plateList[this.bluePosition[i]].drowFighters(this.plateList[this.bluePosition[i]].blueGuerrierFighters , "blue" , "60px" , "80px" ,"45%" ,"-30%" , this.plateList[this.bluePosition[i]].redGuerrierFighters , "blue")
         var bb = document.getElementsByClassName('chosenGuerrierblue')
         for(let j =0 ; j< bb.length ; j++){
             bb[j].style.transform= "scale(0)"   
@@ -119,7 +120,7 @@ console.log(this.bluePosition[0])
         }
         else
         callBack()
-    }, 100);
+    }, 1000);
 }
 
 
@@ -156,7 +157,7 @@ blueTeamAttack(castle , callBack , secondeCastel , toast , container){
             }else{
                 this.redTeamAttack(secondeCastel ,callBack , castle ,  toast , container) 
             }
-         },3000)
+         },1500)
 
 }
 
@@ -191,7 +192,7 @@ redTeamAttack(castle , callBack , secondeCastel , toast , container){
             }else{
                 this.blueTeamAttack(secondeCastel  , callBack , castle , toast , container) 
             }
-         },3000)
+         },1500)
 
 }
 }
