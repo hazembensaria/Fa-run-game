@@ -115,6 +115,11 @@ async function startFight(){
 
 startSequence(()=>{
     console.log('moving completed!!!!!!!!!')
+    console.log(road.plateList[road.bluePosition[0]].blueGuerrierFighters)
+    console.log(road.plateList[road.bluePosition[0]].redGuerrierFighters)
+    console.log("road.plateList[road.bluePosition[0]].blueGuerrierFighters")
+    road.plateList[road.bluePosition[0]].updateAllHealthBar()
+
     attacking(()=>{
         
     console.log(road.bluePosition[0] , "this is fighters blue after fight")
@@ -183,6 +188,7 @@ function teamIsReady(castle , castleInfoUi ){
             toast.alertToastBlue(Container , "you allready choose fighters!" , "rightAlertToast" , "worning")
             return ;
             }
+          
         castle.confirmGuerrier()    
         road.plateList[road.bluePosition[blueLen]].blueGuerrierFighters = blueCastle.chosenGuerrier[blueCastle.chosenGuerrier.length-1]
         road.plateList[road.bluePosition[blueLen]].drowFighters(road.plateList[road.bluePosition[blueLen]].blueGuerrierFighters, "blue" , "60px" , "80px" ,"45%" ,"-30%")
@@ -202,6 +208,7 @@ function teamIsReady(castle , castleInfoUi ){
             toast.alertToast(Container , "you just pick your team !" , "leftAlertToast" , "worning")
             return ;
             }
+        
         castle.confirmGuerrier()
         // console.log(road.plateList[8].uiPlate.style)
         road.plateList[road.redPosition[redLen]].uiPlate.firstChild.style.justifyContent= "start"

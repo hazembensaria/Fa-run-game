@@ -139,7 +139,7 @@ export default class BuildUi{
            }
         }
      const text = document.getElementById(id)
-     text.textContent = `resorces: ${castle.resource} wining rounds : ${castle.winingRounds}`
+     text.textContent = `resorces💰: ${castle.resource} wining rounds 🥇: ${castle.winingRounds}`
     }
      
 

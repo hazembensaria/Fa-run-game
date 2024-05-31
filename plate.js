@@ -75,6 +75,18 @@ export default class Plate{
 
     }
 
+    updateAllHealthBar(){
+
+        for(let i = 0 ; i<this.blueGuerrierFighters.length ; i++){
+            var current = (this.blueGuerrierFighters[this.blueGuerrierFighters.length-1-i].vie*40)/100
+            this.uiPlate.firstChild.children[this.blueGuerrierFighters.length-1-i].firstChild.firstChild.style.width = `${current}px`
+        }
+        for(let i = 0 ; i<this.redGuerrierFighters.length ; i++){
+            var current = (this.redGuerrierFighters[i].vie*40)/100
+            this.uiPlate.firstChild.children[this.blueGuerrierFighters.length+i].firstChild.firstChild.style.width = `${current}px`
+        }
+    }
+
 
     eraiseKilledFighter(attackingTeam){
         attackingTeam === "blue"? 
