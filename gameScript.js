@@ -116,12 +116,7 @@ async function startFight(){
 startSequence(()=>{
     console.log('moving completed!!!!!!!!!')
     attacking(()=>{
-        road.checkIfBlueFightersExist()
-        road.checkIfRedFightersExist()
-        road.checkIfBlueWin(toast , Container ,redPlayer , bluePlayer)
-        road.checkIfRedWin()
-
-
+        
     console.log(road.bluePosition[0] , "this is fighters blue after fight")
     road.plateList[road.bluePosition[0]].blueGuerrierFighters.length!==0 ?
     blueCastle.chosenGuerrier[0]=road.plateList[road.bluePosition[0]].blueGuerrierFighters:
@@ -130,6 +125,11 @@ startSequence(()=>{
     road.plateList[road.redPosition[0]].redGuerrierFighters.length!==0 ?
     redCastle.chosenGuerrier[0]=road.plateList[road.redPosition[0]].redGuerrierFighters:
     redCastle.chosenGuerrier.shift()
+
+    road.checkIfBlueFightersExist()
+        road.checkIfRedFightersExist()
+        road.checkIfBlueWin(toast , Container ,redPlayer , bluePlayer)
+        road.checkIfRedWin()
 
     blueCastle.clameRewards()
     redCastle.clameRewards()

@@ -91,7 +91,7 @@ console.log(this.bluePosition[0])
 
 
  moveBlue(castle  , callBack , secondeCastel){
-    if(this.plateList[this.bluePosition[0]+1].redGuerrierFighters.length !==0 && this.bluePosition[0] ===0){
+    if(this.plateList[this.bluePosition[0]+1].redGuerrierFighters.length !==0 && this.bluePosition[0] ===0){    
        
             this.moveRed(secondeCastel , callBack , castle);
                 console.log("finishhhhhhhhh from reddd !!!!")
@@ -157,7 +157,7 @@ blueTeamAttack(castle , callBack , secondeCastel , toast , container){
             }else{
                 this.redTeamAttack(secondeCastel ,callBack , castle ,  toast , container) 
             }
-         },1000)
+         },100)
 
 }
 
@@ -190,7 +190,7 @@ redTeamAttack(castle , callBack , secondeCastel , toast , container){
             }else{
                 this.blueTeamAttack(secondeCastel  , callBack , castle , toast , container) 
             }
-         },1000)
+         },100)
 
 }
 }
