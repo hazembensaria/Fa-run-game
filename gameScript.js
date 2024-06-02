@@ -134,7 +134,7 @@ startSequence(()=>{
     road.checkIfBlueFightersExist()
         road.checkIfRedFightersExist()
         road.checkIfBlueWin(toast , Container ,redPlayer , bluePlayer)
-        road.checkIfRedWin()
+        road.checkIfRedWin(toast , Container ,redPlayer , bluePlayer)
 
     blueCastle.clameRewards()
     redCastle.clameRewards()

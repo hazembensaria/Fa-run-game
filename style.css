@@ -55,6 +55,7 @@
 #playButton{
   position: absolute;
   top: 1rem;
+  left: 43%;
   width: 200px;
   height: 50px;
   border-radius: 10px;

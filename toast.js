@@ -204,5 +204,53 @@ blueWinToast(element , redPlayer , bluePlayer){
 
 }
 
+
+
+redWinToast(element , redPlayer , bluePlayer){
+    var toast = document.createElement("div")
+    var redName = document.createElement("div")
+    var blueName = document.createElement("div")
+    redName.textContent = redPlayer.name
+    blueName.textContent = bluePlayer.name
+    var redFrame = document.createElement("img")
+    var blueFrame = document.createElement("img")
+    var blueImg = document.createElement("img")
+    var redImg = document.createElement("img")
+    var vectoryPanel = document.createElement("img")
+    var vectoryFrame = document.createElement("img")
+
+
+    
+    redFrame.classList.add("redFrameRedWin")
+    blueFrame.classList.add("blueFrameRedWin")
+    redImg.classList.add("redImageRedWin")
+    blueImg.classList.add("blueImageRedWin")
+    redName.classList.add("redNameRedWin")
+    blueName.classList.add("blueNameRedWin")
+    vectoryPanel.classList.add("vectoryPanel")
+    vectoryFrame.classList.add("vectoryFrame")
+
+
+    redFrame.src = "images/frame.png"
+    blueFrame.src = "images/frame.png"
+    vectoryPanel.src ="images/vectoryPanel.png"
+    vectoryFrame.src  ="images/vectoryFrame.png"
+    blueImg.src = bluePlayer.avatar
+    redImg.src = redPlayer.avatar
+    toast.appendChild(redFrame)
+    toast.appendChild(blueFrame)
+    toast.appendChild(redImg)
+    toast.appendChild(blueImg)
+    toast.appendChild(redName)
+    toast.appendChild(blueName)
+    toast.appendChild(vectoryPanel)
+    toast.appendChild(vectoryFrame)
+
+    toast.classList.add("gameBeginToast")
+    element.appendChild(toast)
+
+
+}
+
 }
 

@@ -33,10 +33,9 @@ export default class Road{
     }
     this.bluePosition.push(0)
 }
-checkIfRedWin(){
+checkIfRedWin(toast , Container , redPlayer , bluePlayer){
     if(this.redPosition[0] === 0){
-        alert("red team win")
-        location.reload()
+        toast.redWinToast(Container , redPlayer , bluePlayer)
         console.log("red team win")
     }
 }
@@ -85,7 +84,7 @@ console.log(this.bluePosition[0])
         else
         this.moveBlue( secodeCastel , callBack , castle);
 
-    }, 100);
+    }, 1000);
 }
 
 
@@ -120,7 +119,7 @@ console.log(this.bluePosition[0])
         }
         else
         callBack()
-    }, 100);
+    }, 1000);
 }
 
 
@@ -157,7 +156,7 @@ blueTeamAttack(castle , callBack , secondeCastel , toast , container){
             }else{
                 this.redTeamAttack(secondeCastel ,callBack , castle ,  toast , container) 
             }
-         },100)
+         },1000)
 
 }
 
@@ -190,7 +189,7 @@ redTeamAttack(castle , callBack , secondeCastel , toast , container){
             }else{
                 this.blueTeamAttack(secondeCastel  , callBack , castle , toast , container) 
             }
-         },100)
+         },1000)
 
 }
 }

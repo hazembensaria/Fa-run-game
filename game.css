@@ -701,3 +701,143 @@
                         transform: translateX(-28.5rem) translateY(11rem) scale(1.2);
                     }
                     }                         
+
+
+                    .redFrameRedWin{
+                        z-index: 5;
+                        width: 300px;
+                        position: absolute;
+                        top: 20%;
+                        left: 10%;
+                        animation: redframe1 1s 0.3s ease-in-out forwards,
+                                    blueframe21 .5s 0.9s ease-in-out forwards;
+                    }
+                    .blueFrameRedWin{
+                        z-index: 5;
+                        width: 300px;
+                    
+                        position: absolute;
+                        top: 20%;
+                        right: 10%;
+                        animation: blueframe1 1s 0.3s ease-in-out forwards;
+                                 
+                    
+                        
+                    }
+                    .redImageRedWin{
+                        width: 230px;
+                        position: absolute;
+                        top: 24%;
+                        left: 12%;
+                        border-radius: 50%;
+                        animation: redframe1 1s 0.3s ease-in-out forwards;
+                                   
+                    }
+                    .blueImageRedWin{
+                        width: 230px;
+                        position: absolute;
+                        top: 24%;
+                        right: 12%;
+                        border-radius: 50%;
+                        animation: blueframe1 1s 0.3s ease-in-out forwards;
+                    
+                    }
+                    .redNameRedWin{
+                        width: 230px;
+                        height: 40px;
+                        border-radius: 5px;
+                        position: absolute;
+                        top: 64%;
+                        left: 13%;
+                        background-color: #fc0606;
+                        display: flex;
+                        color: white;
+                        font-size: 30px;
+                        justify-content: center;
+                        align-items: center;
+                        animation: redName1 1s 0.3s ease-in-out forwards;
+                    
+                    }
+                    .blueNameRedWin{
+                        width: 230px;
+                        height: 40px;
+                        border-radius: 5px;
+                        position: absolute;
+                        top: 64%;
+                        right: 13%;
+                        background-color: #063bfc;
+                        display: flex;
+                        color: white;
+                        font-size: 30px;
+                        justify-content: center;
+                        align-items: center;
+                       
+                        animation: bluename1 1s 0.3s ease-in-out forwards;
+                    }
+                    
+@keyframes redframe1 {
+    0% {
+        transform: translateX(0) scale(1);
+    }
+    100% {
+        transform: translate(30rem, 8rem) scale(1.2);
+    }
+
+}
+
+@keyframes blueframe1 {
+    0% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(20rem)  scale(0);
+        opacity: 0;
+    }
+    }
+
+    @keyframes blueframe21 {
+        0% {
+           opacity: 1;
+        }
+        100% {
+           opacity: 0;
+        }
+        }
+
+ @keyframes vectoryPanel {
+            0% {
+                transform: translatey(0)
+            }
+            100% {
+               transform:  translateY(16rem);
+            }
+            }
+
+@keyframes vectoryframe {
+                0% {
+                    transform: scale(0);
+                    opacity: 0;
+                }
+                100% {
+                    transform: scale(1);
+
+                   opacity: 1;
+                }
+                }    
+                @keyframes redName1 {
+                    0% {
+                        transform: translateX(0) scale(1);
+                    }
+                    100% {
+                        transform: translateX(28.5rem) translateY(11rem) scale(1.2);
+                    }}
+
+                    @keyframes bluename1 {
+                        0% {
+                            transform: translateX(0) scale(1);
+                        }
+                        100% {
+                            transform: translateX(28.5rem) scale(0);
+                        }
+                        }  
